@@ -6,15 +6,13 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-
-
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import "../styles/CheckoutPage.css";
-
 import cardImage from "../assets/cards.jpg";
+
 function CheckoutPage() {
 
   const stripe = useStripe();
@@ -23,9 +21,11 @@ function CheckoutPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const total = location.state?.total;
-
   const { cartItems, clearCart } = useContext(CartContext);
+
+  const total =
+    location.state?.total ||
+    cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,23 +35,37 @@ function CheckoutPage() {
 
     if (!stripe || !elements) return;
 
+    if (!total || total <= 0) {
+      setError("Invalid amount");
+      return;
+    }
+
     setLoading(true);
     setError("");
 
     try {
-
-
+      // ✅ STEP 1: Create PaymentIntent
       const res = await axios.post(
         "http://localhost:5000/api/payment/create-payment",
         { amount: total }
       );
 
       const clientSecret = res.data.clientSecret;
+      console.log("CLIENT SECRET:", clientSecret);
 
+      // ✅ STEP 2: Get card element
+      const cardElement = elements.getElement(CardNumberElement);
 
+      if (!cardElement) {
+        setError("Card element not loaded");
+        setLoading(false);
+        return;
+      }
+
+      // ✅ STEP 3: Confirm payment
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: elements.getElement(CardNumberElement),
+          card: cardElement,
         },
       });
 
@@ -61,25 +75,21 @@ function CheckoutPage() {
         return;
       }
 
+      // ✅ STEP 4: Success
       if (result.paymentIntent.status === "succeeded") {
-
 
         await axios.post("http://localhost:5000/api/order/create", {
           userId: localStorage.getItem("userId"),
           items: cartItems,
-
-
           totalAmount: total
         });
 
         clearCart();
-
         navigate("/orders");
       }
 
     } catch (err) {
       console.log(err);
-
       setError("Payment failed. Try again.");
     }
 
@@ -89,12 +99,10 @@ function CheckoutPage() {
   return (
     <div className="checkout-container">
 
-
       <div className="checkout-left">
 
         <h2>Payment Method</h2>
-        <img src={cardImage} alt="card"  className="card-logos" />
-        
+        <img src={cardImage} alt="card" className="card-logos" />
 
         <form onSubmit={handlePayment}>
 
@@ -103,17 +111,13 @@ function CheckoutPage() {
             <CardNumberElement />
           </div>
 
-
           <div className="row">
             <div>
               <label>Expiry</label>
-
-
               <div className="stripe-input">
                 <CardExpiryElement />
               </div>
             </div>
-
 
             <div>
               <label>CVC</label>
@@ -125,13 +129,12 @@ function CheckoutPage() {
 
           {error && <p className="error">{error}</p>}
 
-          <button className="pay-btn" disabled={loading}>
+          <button className="pay-btn" disabled={loading || !stripe}>
             {loading ? "Processing..." : `Pay ₹${total}`}
           </button>
 
         </form>
       </div>
-
 
       <div className="checkout-right">
 
