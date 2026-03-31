@@ -12,6 +12,8 @@ route.post("/create-payment", async (req, res) => {
       currency: "inr",
     });
 
+    
+
     res.json({
       clientSecret: paymentIntent.client_secret,
     });

@@ -10,12 +10,15 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
+
 import "../styles/CheckoutPage.css";
 import cardImage from "../assets/cards.jpg";
 
 function CheckoutPage() {
 
   const stripe = useStripe();
+
+
   const elements = useElements();
 
   const location = useLocation();
@@ -27,8 +30,9 @@ function CheckoutPage() {
     location.state?.total ||
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  const [loading,setLoading] = useState(false);
+  const [error,  setError] = useState("");
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -44,7 +48,10 @@ function CheckoutPage() {
     setError("");
 
     try {
-      // ✅ STEP 1: Create PaymentIntent
+     
+
+
+
       const res = await axios.post(
         "http://localhost:5000/api/payment/create-payment",
         { amount: total }
@@ -53,7 +60,7 @@ function CheckoutPage() {
       const clientSecret = res.data.clientSecret;
       console.log("CLIENT SECRET:", clientSecret);
 
-      // ✅ STEP 2: Get card element
+      
       const cardElement = elements.getElement(CardNumberElement);
 
       if (!cardElement) {
@@ -62,8 +69,8 @@ function CheckoutPage() {
         return;
       }
 
-      // ✅ STEP 3: Confirm payment
-      const result = await stripe.confirmCardPayment(clientSecret, {
+      
+      const result = await stripe.confirmCardPayment(clientSecret,{
         payment_method: {
           card: cardElement,
         },
@@ -75,7 +82,9 @@ function CheckoutPage() {
         return;
       }
 
-      // ✅ STEP 4: Success
+
+
+      
       if (result.paymentIntent.status === "succeeded") {
 
         await axios.post("http://localhost:5000/api/order/create", {
@@ -87,6 +96,10 @@ function CheckoutPage() {
         clearCart();
         navigate("/orders");
       }
+
+
+
+
 
     } catch (err) {
       console.log(err);
@@ -113,11 +126,15 @@ function CheckoutPage() {
 
           <div className="row">
             <div>
+
               <label>Expiry</label>
               <div className="stripe-input">
                 <CardExpiryElement />
               </div>
             </div>
+
+
+
 
             <div>
               <label>CVC</label>
@@ -127,10 +144,10 @@ function CheckoutPage() {
             </div>
           </div>
 
-          {error && <p className="error">{error}</p>}
+          {error &&<p className="error">{error}</p>}
 
           <button className="pay-btn" disabled={loading || !stripe}>
-            {loading ? "Processing..." : `Pay ₹${total}`}
+            {loading ?"Processing..." :`Pay ₹${total}`}
           </button>
 
         </form>
@@ -142,7 +159,10 @@ function CheckoutPage() {
 
         <div className="summary-box">
           <p>Items: {cartItems.length}</p>
+
+
           <p>Delivery: Free</p>
+
           <h2>Total: ₹{total}</h2>
 
           <button className="summary-btn">
