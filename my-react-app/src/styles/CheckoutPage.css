@@ -1,0 +1,115 @@
+.checkout-container {
+  display: flex;
+  gap: 40px;
+
+  padding: 80px;
+  background: #f4f6fb;
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+}
+
+
+.checkout-left {
+  flex: 2;
+
+
+  background: #fff;
+  padding: 30px;
+
+
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.checkout-left h2 {
+  margin-bottom: 20px;
+}
+
+.stripe-input {
+  padding: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+
+  margin-bottom: 20px;
+  background: #fafafa;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  flex:1;
+}
+
+.row>div{
+  flex:1;
+}
+
+.pay-btn {
+
+  width: 100%;
+  padding: 14px;
+  background: #ffd814;
+  border: none;
+
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background: #f7ca00;
+}
+
+.pay-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+
+.checkout-right {
+  flex: 1;
+}
+
+.summary-box {
+  background: #fff;
+  padding: 25px;
+
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.summary-box h2 {
+  margin-top: 15px;
+}
+
+.summary-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  
+  background: #ffd814;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+.card-logos {
+  width: 100%;
+  max-width: 400px;
+  margin: 10px 0 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: white;
+  padding: 10px;
+}

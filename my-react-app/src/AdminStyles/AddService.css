@@ -1,0 +1,95 @@
+.add-service-page {
+  height: 100vh;
+  display: flex;
+
+
+  justify-content: center;   
+  align-items: center;       
+  background-color: #c8d1dd;
+}
+
+
+
+.add-service-card {
+  width: 420px;
+  background: white;
+  padding: 35px;
+  
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+
+
+.add-service-card h2 {
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+
+
+
+.add-service-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+
+.add-service-card label {
+  text-align: left;
+  font-weight: 500;
+}
+
+
+
+.add-service-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 999;
+  font-family: 'Open Sans',sans-serif;
+
+}
+
+
+
+.add-service-card input[type="text"] {
+  padding: 10px;
+
+
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
+
+.add-service-card input[type="file"] {
+  padding: 8px;
+}
+
+
+
+
+.add-service-card button {
+  margin-top: 10px;
+  padding: 12px;
+
+
+  border: none;
+  border-radius: 6px;
+  background-color: #3b6fd8;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
+
+
+.add-service-card button:hover {
+  background-color: #2a54a8;
+}

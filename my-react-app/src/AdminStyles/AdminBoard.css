@@ -1,0 +1,90 @@
+.admin-board {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f6f7;
+}
+
+.admin-title {
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+
+
+.button-container {
+  display: flex;
+  gap: 40px;
+}
+
+
+
+.admin-btn {
+  width: 220px;
+  height: 80px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: #0071ce;
+  color: white;
+  cursor: pointer;
+  
+}
+
+.admin-btn:hover {
+  background-color: #004f9a;
+ 
+}
+
+.remove-btn {
+  background-color: #d9534f;
+}
+
+.remove-btn:hover {
+  background-color: #b52b27;
+}
+
+
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 225px;
+  height: 100%;
+  background-color: #0930ba;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+
+
+
+
+
+.sidebar-buttons {
+  display: block;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+
+
+.admin-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  font-family: 'Open Sans',sans-serif;
+
+} 
