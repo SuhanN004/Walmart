@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "../styles/ProductPage.css";
+import "../styles/Productpage.css";
 import WalmartHeader from "./WalmartHeader";
 import { CartContext } from "../context/CartContext";
 const BASE_URL = "https://walmart-3-ysdt.onrender.com";
