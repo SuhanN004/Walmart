@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import axios from "axios";
 
-
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
 
 function Login1() {
@@ -29,7 +29,7 @@ const handleContinue = async () => {
   }
 
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/check-email", { email: email});
+    const res = await axios.post(`${BASE_URL}/api/auth/check-email`, { email: email});
 
     if (res.data.exists) {
     
@@ -53,7 +53,7 @@ const handleContinue = async () => {
   }
 
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
+    const res = await axios.post(`${BASE_URL}/api/auth/login`, {
       email: email,
       password: password
     });

@@ -13,6 +13,7 @@ import { CartContext } from "../context/CartContext";
 
 import "../styles/CheckoutPage.css";
 import cardImage from "../assets/cards.jpg";
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
 function CheckoutPage() {
 
@@ -52,10 +53,7 @@ function CheckoutPage() {
 
 
 
-      const res = await axios.post(
-        "http://localhost:5000/api/payment/create-payment",
-        { amount: total }
-      );
+      const res = await axios.post( `${BASE_URL}/api/payment/create-payment`, { amount: total } );
 
       const clientSecret = res.data.clientSecret;
       console.log("CLIENT SECRET:", clientSecret);
@@ -87,11 +85,7 @@ function CheckoutPage() {
       
       if (result.paymentIntent.status === "succeeded") {
 
-        await axios.post("http://localhost:5000/api/order/create", {
-          userId: localStorage.getItem("userId"),
-          items: cartItems,
-          totalAmount: total
-        });
+        await axios.post(`${BASE_URL}/api/order/create`, { userId: localStorage.getItem("userId"), items: cartItems, totalAmount: total });
 
         clearCart();
         navigate("/orders");

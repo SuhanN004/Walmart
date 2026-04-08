@@ -4,7 +4,7 @@ import axios from "axios";
 import "../styles/ProductPage.css";
 import WalmartHeader from "./WalmartHeader";
 import { CartContext } from "../context/CartContext";
-
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 function ProductPage() {
 
   const { id } = useParams();
@@ -18,7 +18,7 @@ function ProductPage() {
   
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/product/${id}`);
+      const res = await axios.get(`${BASE_URL}/api/product/${id}`);
       setProduct(res.data);
     } catch (err) {
       console.log(err);
@@ -41,7 +41,7 @@ function ProductPage() {
   const handleBuy = async () => {
     try {
 
-      await axios.post("http://localhost:5000/api/order/create", {
+      await axios.post(`${BASE_URL}/api/order/create`, {
         userId: userId,   
         items: [
           { ...product, qty: 1 }
@@ -69,7 +69,7 @@ function ProductPage() {
         <div className="product-left">
           <div className="main-image-box">
             <img
-              src={`http://localhost:5000/uploads/${product.image}`}
+              src={`${BASE_URL}/uploads/${product.image}`}
               alt="product"
             />
           </div>

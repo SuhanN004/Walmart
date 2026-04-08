@@ -4,6 +4,8 @@ import "../styles/CartPage.css";
 import WalmartHeader from "./WalmartHeader";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 function CartPage() {
 
   const { cartItems, removeFromCart } = useContext(CartContext);
@@ -46,7 +48,7 @@ function CartPage() {
                 <div className="cart-item" key={item._id}>
 
                   <img
-                    src={`http://localhost:5000/uploads/${item.image}`}
+                    src={`${BASE_URL}/uploads/${item.image}`}
                     alt="product"
                   />
 

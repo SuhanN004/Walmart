@@ -15,7 +15,7 @@ import axios from "axios"
 
 
 import { CartContext } from "../context/CartContext";
-
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 function WalmartHeader() {
 
   const navigate= useNavigate();
@@ -42,7 +42,7 @@ function WalmartHeader() {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/service/view")
+      const res = await axios.get(`${BASE_URL}/api/service/view`)
       setServices(res.data)
     } catch (error) {
       console.log("Error fetching services:", error)

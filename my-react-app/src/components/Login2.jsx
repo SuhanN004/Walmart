@@ -4,6 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
+
 function Login2() {
   
   const navigate = useNavigate();
@@ -34,7 +37,7 @@ const handleSignup = async () => {
 
   try {
 
-    const res = await axios.post("http://localhost:5000/api/auth/signup", {
+    const res = await axios.post(`${BASE_URL}/api/auth/signup`, {
       email,
       firstName,
       lastName,

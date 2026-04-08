@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import WalmartHeader from "./WalmartHeader";
 import "../styles/MyOrders.css";
-
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 function MyOrders() {
 
   const [orders, setOrders] = useState([]);
@@ -12,7 +12,7 @@ function MyOrders() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/order/user/${userId}`
+        `${BASE_URL}/api/order/user/${userId}`
       );
       setOrders(res.data);
     } catch (err) {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import WalmartHeader from "./WalmartHeader";
 import HeroCarousel from "./HeroCarousel";
 import WalmartFooter from "./WalmartFooter";
-
+const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 import "../styles/HomeProducts.css";
 
 function Home() {
@@ -15,7 +15,7 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/product/view");
+      const res = await axios.get(`${ BASE_URL } / api / product / view`);
       setProducts(res.data);
     } catch (err) {
       console.log(err);
@@ -45,10 +45,7 @@ function Home() {
               onClick={() => navigate(`/product/${product._id}`)}
             >
 
-              <img
-                src={`http://localhost:5000/uploads/${product.image}`}
-                alt="product"
-              />
+              <img src={`${BASE_URL}/uploads/${product.image}`} alt="product" />
 
               
 
