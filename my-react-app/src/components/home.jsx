@@ -15,7 +15,7 @@ function Home() {
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(`${ BASE_URL } / api / product / view`);
+      const res = await axios.get(`${BASE_URL}/api/product/view`);
       setProducts(res.data);
     } catch (err) {
       console.log(err);
