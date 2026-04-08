@@ -8,7 +8,7 @@ function AddService() {
 
   const [title,setTitle] = useState("");
 
-
+  const api=import.meta.env.VITE_API;
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -28,7 +28,7 @@ function AddService() {
 
       await axios.post(
 
-        "http://localhost:5000/api/service/add",
+        `${api}/api/service/add`,
         formData,
 
         {

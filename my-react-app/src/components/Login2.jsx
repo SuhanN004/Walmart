@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 
 
 function Login2() {
@@ -12,7 +12,7 @@ function Login2() {
   const navigate = useNavigate();
   const location = useLocation();
 
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   
   const email = location.state?.email || "";
 

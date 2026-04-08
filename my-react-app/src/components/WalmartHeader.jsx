@@ -15,11 +15,11 @@ import axios from "axios"
 
 
 import { CartContext } from "../context/CartContext";
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 function WalmartHeader() {
 
   const navigate= useNavigate();
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const [open, setOpen] = useState(false)
   const [searchActive, setSearchActive] = useState(false)
   const [deptOpen, setDeptOpen] = useState(false)

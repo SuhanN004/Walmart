@@ -4,12 +4,12 @@ import axios from "axios";
 import "../styles/Productpage.css";
 import WalmartHeader from "./WalmartHeader";
 import { CartContext } from "../context/CartContext";
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 function ProductPage() {
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
 
   

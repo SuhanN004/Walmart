@@ -12,8 +12,8 @@ function AddProduct() {
   const[name,setName] = useState("");
   const[price,setPrice] = useState("");
   const[stock,setStock] = useState("");
-
-
+  
+  const api=import.meta.env.VITE_API;
   const [image,setImage] = useState(null);
   const[description, setDescription] = useState("");
   const [category,setCategory] = useState("");
@@ -30,7 +30,7 @@ function AddProduct() {
       try {
 
         const res = await axios.get(
-          "http://localhost:5000/api/service/view"
+          `${api}/api/service/view`
         );
 
         setServices(res.data);
@@ -64,7 +64,7 @@ function AddProduct() {
       formData.append("category", category);
 
       await axios.post(
-        "http://localhost:5000/api/product/add",
+        `${api}/api/product/add`,
         formData,
         {
           headers: {

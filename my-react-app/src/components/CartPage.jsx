@@ -4,13 +4,13 @@ import "../styles/CartPage.css";
 import WalmartHeader from "./WalmartHeader";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 
 function CartPage() {
 
   const { cartItems, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0

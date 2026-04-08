@@ -6,13 +6,13 @@ import { useState } from "react";
 
 import axios from "axios";
 
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 
 
 function Login1() {
   const navigate = useNavigate();
 
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
   
   const [email,setEmail] =useState("");

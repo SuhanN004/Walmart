@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import WalmartHeader from "./WalmartHeader";
 import "../styles/MyOrders.css";
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 function MyOrders() {
 
   const [orders, setOrders] = useState([]);
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const userId = localStorage.getItem("userId");
 
   const fetchOrders = async () => {

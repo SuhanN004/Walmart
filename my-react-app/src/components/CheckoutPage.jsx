@@ -13,11 +13,11 @@ import { CartContext } from "../context/CartContext";
 
 import "../styles/CheckoutPage.css";
 import cardImage from "../assets/cards.jpg";
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
 function CheckoutPage() {
 
   const stripe = useStripe();
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
 
   const elements = useElements();

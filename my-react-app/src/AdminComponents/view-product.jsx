@@ -14,21 +14,21 @@ function ViewProduct() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  const  [editName,setEditName]  = useState("");
-  const [editPrice,setEditPrice] =  useState("");
-  const[editStock,setEditStock] =  useState("");
-  const [editDescription, setEditDescription]  = useState("");
-  const [editImage, setEditImage] =  useState(null);
+  const [editName, setEditName] = useState("");
+  const [editPrice, setEditPrice] = useState("");
+  const [editStock, setEditStock] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editImage, setEditImage] = useState(null);
+  const api = import.meta.env.VITE_API;
 
-  
   const fetchProducts = async () => {
     try {
 
 
-      const res = await axios.get("http://localhost:5000/api/product/view");
+      const res = await axios.get(`${api}/api/product/view`);
       setProducts(res.data);
     }
-    
+
     catch (err) {
       console.error("Error fetching products:", err);
     }
@@ -43,8 +43,8 @@ function ViewProduct() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/product/delete/${id}`);
-      fetchProducts(); 
+      await axios.delete(`${api}/api/product/delete/${id}`);
+      fetchProducts();
     } catch (err) {
       console.error("Error deleting product:", err);
     }
@@ -54,69 +54,69 @@ function ViewProduct() {
 
   const handleEdit = (product) => {
 
-  setEditId(product._id);
+    setEditId(product._id);
 
-  setEditName(product.name);
-  setEditPrice(product.price);
+    setEditName(product.name);
+    setEditPrice(product.price);
 
 
-  setEditStock(product.stock);
+    setEditStock(product.stock);
 
-  setEditDescription(product.description);
+    setEditDescription(product.description);
 
-  setShowEditForm(true);
-};
+    setShowEditForm(true);
+  };
 
 
 
 
   const handleUpdate = async (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
+    try {
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    formData.append("name",editName);
+      formData.append("name", editName);
 
 
-    formData.append("price",editPrice);
+      formData.append("price", editPrice);
 
-    formData.append("stock", editStock);
-    formData.append("description",editDescription);
+      formData.append("stock", editStock);
+      formData.append("description", editDescription);
 
-    if(editImage){
+      if (editImage) {
 
-      formData.append("image", editImage);
+        formData.append("image", editImage);
+      }
+
+      await axios.put(
+        `${api}/api/product/update/${editId}`,
+        formData
+      );
+
+      setShowEditForm(false);
+
+      fetchProducts();
+
+    } catch (err) {
+
+      console.error("Error updating product:", err);
+
     }
-
-    await axios.put(
-      `http://localhost:5000/api/product/update/${editId}`,
-      formData
-    );
-
-    setShowEditForm(false);
-
-    fetchProducts();
-
-  } catch (err) {
-
-    console.error("Error updating product:", err);
-
-  }
-};
+  };
 
 
 
 
 
-  
+
   const searchText = search.toLowerCase();
 
   const filteredProducts = products.filter(product =>
-  
-  
+
+
     product.name.toLowerCase().includes(searchText)
 
 
@@ -147,13 +147,13 @@ function ViewProduct() {
         </button>
 
 
-        
+
 
 
       </div>
 
 
-      
+
       <div className="products-section">
 
         <div className="products-header">
@@ -161,9 +161,9 @@ function ViewProduct() {
 
 
           <input
-          type="text"
-          
-          placeholder="Search here..."
+            type="text"
+
+            placeholder="Search here..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -171,143 +171,143 @@ function ViewProduct() {
 
 
 
-      {filteredProducts.length === 0 && (
-        <div className="empty-state">
-        No products found.
-         </div>
-      )}
+        {filteredProducts.length === 0 && (
+          <div className="empty-state">
+            No products found.
+          </div>
+        )}
 
 
 
-{filteredProducts.length > 0 && (
-  <table>
-    <thead>
-      <tr>
-        <th>PRODUCT</th>
-        <th>PRICE</th>
-        <th>STOCK</th>
-        <th>ACTION</th>
-      </tr>
-    </thead>
+        {filteredProducts.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>PRODUCT</th>
+                <th>PRICE</th>
+                <th>STOCK</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
 
 
 
-    <tbody>
+            <tbody>
 
 
-      {filteredProducts.map((product) => (
+              {filteredProducts.map((product) => (
 
 
-        <tr key={product._id}>
+                <tr key={product._id}>
 
 
-          <td>
-            <div className="product-info">
-              <img
-                src={product.image ? `http://localhost:5000/uploads/${product.image}` : ""}
-                alt="product"
+                  <td>
+                    <div className="product-info">
+                      <img
+                        src={product.image ? `${api}/uploads/${product.image}` : ""}
+                        alt="product"
+                      />
+
+                      <span>{product.name}</span>
+                    </div>
+
+
+                  </td>
+
+
+                  <td>₹{product.price}</td>
+                  <td>{product.stock}</td>
+
+
+                  <td>
+                    <button className="delete-btn" onClick={() => handleDelete(product._id)}>
+                      Delete
+                    </button>
+
+
+
+                    <button className="edit-btn" onClick={() => handleEdit(product)}>
+                      Edit
+                    </button>
+
+
+                  </td>
+                </tr>
+
+
+              ))}
+            </tbody>
+          </table>
+        )}
+
+      </div>
+
+
+
+      {showEditForm && (
+
+        <div className="edit-form-container">
+
+
+          <div className="edit-form-card">
+            <h3>Edit Product</h3>
+
+            <form onSubmit={handleUpdate}>
+
+
+              <input type="text" value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+
+                placeholder="Product Name"
               />
 
-              <span>{product.name}</span>
-            </div>
+              <input type="number" value={editPrice} onChange={(e) => setEditPrice(e.target.value)} placeholder="Price" />
+
+              <input
+                type="number"
+                value={editStock}
+
+                onChange={(e) => setEditStock(e.target.value)}
+                placeholder="Stock"
+              />
 
 
-          </td>
+              <input type="text" value={editDescription}
 
+                onChange={(e) => setEditDescription(e.target.value)} placeholder="Description"
+              />
 
-          <td>₹{product.price}</td>
-          <td>{product.stock}</td>
-
-
-          <td>
-            <button className="delete-btn"  onClick={() => handleDelete(product._id)}>
-              Delete
-            </button>
-
-
-
-            <button className="edit-btn"  onClick={()=>  handleEdit(product)}>
-              Edit
-            </button>
-
-
-          </td>
-        </tr>
-
-
-      ))}
-    </tbody>
-  </table>
-  )}
-
- </div>
+              <input type="file" onChange={(e) => setEditImage(e.target.files[0])} />
 
 
 
-{showEditForm && (
+              <div className="edit-buttons">
 
-  <div className="edit-form-container">
-
-
-  <div className="edit-form-card">
-  <h3>Edit Product</h3>
-
-  <form onSubmit={handleUpdate}>
-
-
-  <input type="text" value={editName}
-     onChange={(e) => setEditName(e.target.value)}
-     
-    placeholder="Product Name"
-   />
-
-  <input type="number" value={editPrice} onChange={(e) =>setEditPrice(e.target.value)}   placeholder="Price" />
-
-  <input
-  type="number"
-  value={editStock}
-
-  onChange={(e) => setEditStock(e.target.value)}
-  placeholder="Stock"
-  />
-
-
-  <input type="text" value={editDescription}
-  
-  onChange={(e) => setEditDescription(e.target.value)}  placeholder="Description"
-  />
-
-  <input type="file" onChange={(e)=>setEditImage(e.target.files[0])} />
+                <button type="submit" className="update-btn">
+                  Update
+                </button>
 
 
 
-  <div className="edit-buttons">
+                <button type="button"
+                  className="cancel-btn"
 
-    <button type="submit" className="update-btn">
-    Update
-    </button>
+                  onClick={() => setShowEditForm(false)}
+                >
+                  Cancel
+                </button>
 
+              </div>
 
+            </form>
 
-    <button type="button"
-      className="cancel-btn"
-                  
-      onClick={() => setShowEditForm(false)}
-    >
-     Cancel
-    </button>
+          </div>
 
-  </div>
+        </div>
 
-  </form>
+      )}
 
-   </div>
-
-  </div>
-
- )}
-
-  </div>
+    </div>
   );
 }
 

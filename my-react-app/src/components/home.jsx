@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import WalmartHeader from "./WalmartHeader";
 import HeroCarousel from "./HeroCarousel";
 import WalmartFooter from "./WalmartFooter";
-const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
 import "../styles/HomeProducts.css";
 
 function Home() {
 
   const [products, setProducts] = useState([]);
   const navigate = useNavigate(); 
-
+  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${ BASE_URL } / api / product / view`);
