@@ -28,7 +28,7 @@ app.use("/api/service", serviceRoutes);
 app.use("/api/payment", paymentRoutes);
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/Products")
+mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
