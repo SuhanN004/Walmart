@@ -33,7 +33,7 @@ app.use("/api/payment", paymentRoutes);
 
 
 app.get("/", (req, res) => {
-res.send("Backend is running 🚀");
+res.send("Backend is running ");
 });
 
 
