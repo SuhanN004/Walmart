@@ -16,7 +16,15 @@ const OrderSchema = new mongoose.Schema({
     }
   ],
 
-  totalAmount: Number,
+  totalAmount:{
+    type:Number,
+    required:true
+  },
+  
+  status:{
+    type:String,
+    default:"Placed"
+  },
 
   createdAt: {
     type: Date,
