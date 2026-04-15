@@ -10,7 +10,7 @@ function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
-  const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
+  const { addToCart, cartItems } = useContext(CartContext);
 
   
   const userId = localStorage.getItem("userId");
@@ -63,82 +63,54 @@ function ProductPage() {
     <>
       <WalmartHeader />
 
-      <div className="product-page">
+<div className="product-page">
 
-        
-        <div className="product-left">
-          <div className="main-image-box">
-            <img
-              src={`${BASE_URL}/uploads/${product.image}`}
-              alt="product"
-            />
-          </div>
-        </div>
+  {/* LEFT IMAGE */}
+  <div className="product-left">
+    <div className="main-image-box">
+      <img
+        src={`${BASE_URL}/uploads/${product.image}`}
+        alt="product"
+      />
+    </div>
+  </div>
 
-       
-        <div className="product-right">
+  {/* CENTER DETAILS */}
+  <div className="product-center">
 
-          <p className="brand">Visit Store</p>
+    <p className="brand">Visit Store</p>
 
-          <h2 className="product-title">{product.name}</h2>
+    <h2 className="product-title">{product.name}</h2>
 
-          <p className="price">₹{product.price}</p>
+    <p className="rating">⭐⭐⭐⭐☆ (4.2)</p>
 
-          <p className="desc">{product.description}</p>
+    <p className="desc">{product.description}</p>
 
-          
-          <div className="cart-toggle">
+  </div>
 
-            {getItemQty() === 0 ? (
+  {/* RIGHT BUY BOX */}
+  <div className="product-buy-box">
 
-              <button
-                className="add-btn"
-                onClick={() => addToCart(product)}
-              >
-                Add To Cart
-              </button>
+    <h2 className="price">₹{product.price}</h2>
 
-            ) : (
+    <button
+      className="add-btn"
+      onClick={() => addToCart(product)}
+    >
+      Add to cart
+    </button>
 
-              <div className="qty-box">
+    <button
+      className="buy-btn"
+      onClick={handleBuy}
+    >
+      Buy now
+    </button>
 
-                <button
-                  className="qty-btn"
-                  onClick={() => removeFromCart(product._id)}
-                >
-                  −
-                </button>
+  </div>
 
-                <span className="qty-text">
-                  {getItemQty()} added
-                </span>
+</div>
 
-                <button
-                  className="qty-btn"
-                  onClick={() => addToCart(product)}
-                >
-                  +
-                </button>
-
-              </div>
-
-            )}
-
-          </div>
-
-          
-          <button
-            className="buy-btn"
-            onClick={handleBuy}
-          >
-            Buy Now
-          </button>
-
-          
-
-        </div>
-
-      </div>
     </>
   );
 }
