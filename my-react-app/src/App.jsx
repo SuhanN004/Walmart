@@ -30,11 +30,11 @@ function App() {
   return (
     <Routes>
 
-      {/* AUTH */}
+      
       <Route path="/" element={<Login1 />} />
       <Route path="/create-account" element={<Login2 />} />
 
-      {/* USER */}
+      
       <Route path="/home" element={<Home />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
@@ -48,7 +48,7 @@ function App() {
       <Route path="/wishlist" element={<DummyPage title="Wishlist Page" />} />
       <Route path="/taxes" element={<DummyPage title="Taxes Page" />} />
 
-      {/* ADMIN */}
+      
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/adminboard" element={<AdminBoard />} />
       <Route path="/admin/add-product" element={<AddProduct />} />

@@ -55,7 +55,7 @@ function HeroCarousel() {
   return (
     <div className="hero-carousel">
 
-      {/* ===== SLIDER ===== */}
+
       <div
         className="hero-slide"
         style={{ backgroundImage: `url(${slides[current].image})` }}
@@ -84,10 +84,10 @@ function HeroCarousel() {
         </div>
       </div>
 
-      {/* ===== WALMART HERO GRID ===== */}
+    
       <div className="hero-grid">
 
-        {/* BIG LEFT */}
+        
         <div className="hero-big" onClick={() => handleClick("/auto-service")}>
           <img src={l1} alt="" />
           <div className="hero-text">
@@ -96,7 +96,7 @@ function HeroCarousel() {
           </div>
         </div>
 
-        {/* RIGHT GRID */}
+        
         <div className="hero-small-grid">
 
           <div className="hero-small" onClick={() => handleClick("/cashback")}>
