@@ -30,7 +30,7 @@ function Home() {
     <div>
 
       <WalmartHeader />
-
+      <HeroCarousel />
 
       <div className="home-products-section">
         <h2 className="home-title">All you need for Holi</h2>
@@ -69,9 +69,6 @@ function Home() {
 
         </div>
       </div>
-      <HeroCarousel />
-
-      
 
       <WalmartFooter />
 
