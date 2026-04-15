@@ -1,31 +1,23 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendMail = async (to, subject, text) => {
-    try {
+  try {
 
+    const data = await resend.emails.send({
+      from: "onboarding@resend.dev", // temporary sender
+      to: to,
+      subject: subject,
+      text: text,
+    });
 
-        const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
-        });
+    console.log(" Email sent:", data);
 
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to,
-            subject,
-            text,
-        });
-
-        console.log("Email sent successfully");
-    } catch (err) {
-        console.log("Mail error:", err);
-    }
+  } catch (err) {
+    console.log(" MAIL ERROR:", err);
+    throw err;
+  }
 };
 
 module.exports = sendMail;
