@@ -6,7 +6,7 @@ const sendMail = async (to, subject, text) => {
   try {
 
     const data = await resend.emails.send({
-      from: "suhanvnrs@gmail.com.", 
+      from: "onboarding@resend.dev", 
       to: to,
       subject: subject,
       text: text,
