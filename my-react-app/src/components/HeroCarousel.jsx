@@ -84,53 +84,51 @@ function HeroCarousel() {
         </div>
       </div>
 
-    
       <div className="hero-grid">
 
-  {/* LEFT BIG */}
-  <div className="hero-big-left" onClick={() => handleClick("/auto-service")}>
-    <img src={l1} alt="" />
-    <div className="hero-text">
-      <h2>Book auto services easily online</h2>
-      <button>Schedule now</button>
-    </div>
-  </div>
+        {/* LEFT BIG */}
+        <div className="hero-big-left" onClick={() => handleClick("/auto-service")}>
+          <img src={l1} alt="" />
+          <div className="hero-text">
+            <h2>Book auto services easily online</h2>
+            <button>Schedule now</button>
+          </div>
+        </div>
 
-  {/* CENTER GRID */}
-  <div className="hero-center-grid">
+        {/* CENTER */}
+        <div className="hero-center">
 
-    <div className="hero-small" onClick={() => handleClick("/cashback")}>
-      <img src={l2} alt="" />
-      <p>5% cashback</p>
-    </div>
+          {/* TOP WIDE */}
+          <div className="hero-wide" onClick={() => handleClick("/cashback")}>
+            <img src={l2} alt="" />
+            <p>5% cashback</p>
+          </div>
 
-    <div className="hero-small" onClick={() => handleClick("/gift-cards")}>
-      <img src={l3} alt="" />
-      <p>Spring gift cards</p>
-    </div>
+          {/* BOTTOM 2 */}
+          <div className="hero-bottom">
+            <div className="hero-small" onClick={() => handleClick("/gift-cards")}>
+              <img src={l3} alt="" />
+              <p>Spring gift cards</p>
+            </div>
 
-    <div className="hero-small" onClick={() => handleClick("/wishlist")}>
-      <img src={l4} alt="" />
-      <p>Wishlist</p>
-    </div>
+            <div className="hero-small" onClick={() => handleClick("/wishlist")}>
+              <img src={l4} alt="" />
+              <p>Wishlist</p>
+            </div>
+          </div>
 
-    <div className="hero-small" onClick={() => handleClick("/taxes")}>
-      <img src={l5} alt="" />
-      <p>Taxes done right</p>
-    </div>
+        </div>
 
-  </div>
+        {/* RIGHT BIG */}
+        <div className="hero-big-right" onClick={() => handleClick("/greenhouse")}>
+          <img src={l6} alt="" />
+          <div className="hero-text-right">
+            <h3>Greenhouses? We’ve got ’em!</h3>
+            <span>Shop now</span>
+          </div>
+        </div>
 
-  {/* RIGHT BIG (🔥 NEW — THIS WAS MISSING) */}
-  <div className="hero-big-right" onClick={() => handleClick("/greenhouse")}>
-    <img src={l5} alt="" />
-    <div className="hero-text-right">
-      <h3>Greenhouses? We’ve got ’em!</h3>
-      <span>Shop now</span>
-    </div>
-  </div>
-
-</div>
+      </div>
 
     </div>
   );
