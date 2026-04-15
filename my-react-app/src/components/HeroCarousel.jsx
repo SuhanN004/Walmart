@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/HeroCarousel.css";
 
 import hero1 from "../assets/hero1.png";
@@ -12,7 +13,20 @@ import item4 from "../assets/item4.jpg";
 import item5 from "../assets/item5.jpg";
 import item6 from "../assets/item6.jpg";
 
+import l1 from "../assets/l1.png";
+import l2 from "../assets/l2.png";
+import l3 from "../assets/l3.png";
+import l4 from "../assets/l4.png";
+import l5 from "../assets/l5.png";
+
 function HeroCarousel() {
+
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+    navigate(path);
+  };
+
   const slides = [
     { image: hero1 },
     { image: hero2 },
@@ -20,115 +34,91 @@ function HeroCarousel() {
   ];
 
   const products = [
-    {
-
-
-      img: item1,
-      price: "$199.99 +$99 shipping",
-      title: "3.75HP Folding Treadmill, 300lb Capacity with Incline",
-    },
-    {
-      img: item2,
-      price: "Now $19.79 (was $89.99)",
-
-      title: "SKIMI Hair Curling Iron Wand with LED Display",
-    },
-    {
-
-      img: item3,
-      price: "$11.42",
-      title: "Blackhead Remover Nose Strips, Deep Cleansing",
-    },
-    {
-
-
-      img: item4,
-      price: "Now $24.29 (was $26.99)",
-      title: "20-Piece Kitchen Linen & Dish Towels Cotton Set",
-    },
-    {
-      img: item5,
-      price: "Now $49.99 (was $199.99)",
-
-
-      title: "NICEBAY Hair Dryer Brush with Multiple Attachments",
-    },
-    {
-      img: item6,
-      price: "$133.51",
-      title: "Avenco Breezure Pocket Spring Hybrid Queen Mattress",
-    },
+    { img: item1, price: "$199.99", title: "Treadmill" },
+    { img: item2, price: "$19.79", title: "Hair Curling" },
+    { img: item3, price: "$11.42", title: "Nose Strips" },
+    { img: item4, price: "$24.29", title: "Kitchen Set" },
+    { img: item5, price: "$49.99", title: "Hair Dryer" },
+    { img: item6, price: "$133.51", title: "Mattress" },
   ];
-
-
 
   const [current, setCurrent] = useState(0);
 
- const nextSlide = () => {
-  
-  if (current === slides.length - 1) {
-    setCurrent(0);
-  } else {
-    setCurrent(current + 1);
-  }
-};
+  const nextSlide = () => {
+    setCurrent(current === slides.length - 1 ? 0 : current + 1);
+  };
 
-
-const prevSlide = () => {
-
-
-  if (current === 0) {
-    setCurrent(slides.length - 1);
-
-  } else {
-    setCurrent(current - 1);
-
-  }
-};
-
+  const prevSlide = () => {
+    setCurrent(current === 0 ? slides.length - 1 : current - 1);
+  };
 
   return (
     <div className="hero-carousel">
 
-    
+      {/* ===== SLIDER ===== */}
       <div
         className="hero-slide"
         style={{ backgroundImage: `url(${slides[current].image})` }}
       >
-
         <button className="left" onClick={prevSlide}>‹</button>
         <button className="right" onClick={nextSlide}>›</button>
       </div>
 
-    
+      {/* ===== FLASH DEALS ===== */}
       <div className="flash-section">
 
-
         <div className="flash-header">
-          <div>
-            <h2>Flash Deals</h2>
-
-
-            
-          </div>
+          <h2>Flash Deals</h2>
           <span className="view-all">View all</span>
         </div>
 
         <div className="flash-row">
-
-
-          {products.map((product, i) => (
-
+          {products.map((p, i) => (
             <div className="flash-card" key={i}>
-
-              <img src={product.img} alt="product" />
-              <p className="price">{product.price}</p>
-
-              <p className="title">{product.title}</p>
+              <img src={p.img} alt="" />
+              <p className="price">{p.price}</p>
+              <p className="title">{p.title}</p>
               <button className="option-btn">Options</button>
             </div>
-          )
-          )}
+          ))}
+        </div>
+      </div>
+
+      {/* ===== WALMART HERO GRID ===== */}
+      <div className="hero-grid">
+
+        {/* BIG LEFT */}
+        <div className="hero-big" onClick={() => handleClick("/auto-service")}>
+          <img src={l1} alt="" />
+          <div className="hero-text">
+            <h2>Book auto services easily online</h2>
+            <button>Schedule now</button>
+          </div>
+        </div>
+
+        {/* RIGHT GRID */}
+        <div className="hero-small-grid">
+
+          <div className="hero-small" onClick={() => handleClick("/cashback")}>
+            <img src={l2} alt="" />
+            <p>5% cashback</p>
+          </div>
+
+          <div className="hero-small" onClick={() => handleClick("/gift-cards")}>
+            <img src={l3} alt="" />
+            <p>Spring gift cards</p>
+          </div>
+
+          <div className="hero-small" onClick={() => handleClick("/wishlist")}>
+            <img src={l4} alt="" />
+            <p>Wishlist</p>
+          </div>
+
+          <div className="hero-small" onClick={() => handleClick("/taxes")}>
+            <img src={l5} alt="" />
+            <p>Taxes done right</p>
+          </div>
+
         </div>
       </div>
 
