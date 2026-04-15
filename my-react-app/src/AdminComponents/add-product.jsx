@@ -38,7 +38,8 @@ function AddProduct() {
       } catch (error) {
 
         console.log("Error fetching services:", error);
-
+  
+        
       }
 
     };
