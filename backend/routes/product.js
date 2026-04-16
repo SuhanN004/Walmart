@@ -3,7 +3,6 @@ const Product = require("../model/Product");
 const multer = require('multer');
 const path = require('path');
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
@@ -16,11 +15,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-
+// 🔥 ADD PRODUCT
 route.post("/add", upload.single("image"), async (req, res) => {
     try {
 
-        const { name, price, stock, description, category } = req.body;
+        const { name, price, stock, description, category, features } = req.body;
 
         const productData = new Product({
             name,
@@ -28,6 +27,10 @@ route.post("/add", upload.single("image"), async (req, res) => {
             stock,
             description,
             category,
+
+            // ✅ HANDLE FEATURES ARRAY
+            features: features ? JSON.parse(features) : [],
+
             image: req.file ? req.file.filename : null
         });
 
@@ -41,20 +44,18 @@ route.post("/add", upload.single("image"), async (req, res) => {
 });
 
 
-
+// VIEW ALL
 route.get("/view", async (req, res) => {
     try {
-
         const products = await Product.find();
         res.json(products);
-
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
 
-
+// VIEW SINGLE
 route.get("/:id", async (req, res) => {
     try {
 
@@ -72,7 +73,7 @@ route.get("/:id", async (req, res) => {
 });
 
 
-
+// DELETE
 route.delete("/delete/:id", async (req, res) => {
     try {
 
@@ -85,18 +86,21 @@ route.delete("/delete/:id", async (req, res) => {
 });
 
 
-
+// 🔥 UPDATE PRODUCT (WITH FEATURES)
 route.put("/update/:id", upload.single("image"), async (req, res) => {
     try {
 
-        const { name, price, stock, description, category } = req.body;
+        const { name, price, stock, description, category, features } = req.body;
 
         let updatedData = {
             name,
             price,
             stock,
             description,
-            category
+            category,
+
+            // ✅ UPDATE FEATURES
+            features: features ? JSON.parse(features) : []
         };
 
         if (req.file) {
@@ -115,6 +119,5 @@ route.put("/update/:id", upload.single("image"), async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
-
 
 module.exports = route;

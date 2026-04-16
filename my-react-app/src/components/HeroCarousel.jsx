@@ -55,7 +55,7 @@ function HeroCarousel() {
   return (
     <div className="hero-carousel">
 
-      {/* SLIDER */}
+      
       <div
         className="hero-slide"
         style={{ backgroundImage: `url(${slides[current].image})` }}
@@ -64,7 +64,7 @@ function HeroCarousel() {
         <button className="right" onClick={nextSlide}>›</button>
       </div>
 
-      {/* FLASH DEALS */}
+      
       <div className="flash-section">
 
         <div className="flash-header">
@@ -84,23 +84,23 @@ function HeroCarousel() {
         </div>
       </div>
 
-      {/* HERO GRID */}
+      
       <div className="hero-grid">
 
-        {/* LEFT BIG */}
+        
         <div className="hero-big-left" onClick={() => handleClick("/auto-service")}>
           <img src={l1} alt="" />
         </div>
 
-        {/* CENTER */}
+        
         <div className="hero-center">
 
-          {/* TOP */}
+          
           <div className="hero-top" onClick={() => handleClick("/cashback")}>
             <img src={l2} alt="" />
           </div>
 
-          {/* BOTTOM */}
+          
           <div className="hero-bottom">
 
             <div className="hero-small" onClick={() => handleClick("/gift-cards")}>
@@ -114,7 +114,7 @@ function HeroCarousel() {
           </div>
         </div>
 
-        {/* RIGHT BIG */}
+        
         <div className="hero-big-right" onClick={() => handleClick("/taxes")}>
           <img src={l5} alt="" />
         </div>

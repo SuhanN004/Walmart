@@ -5,17 +5,19 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
   price: {
     type: Number,
     required: true
   },
+
   stock: {
     type: Number,
     required: true
   },
+
   image: {
     type: String
-
   },
 
   description: {
@@ -23,7 +25,13 @@ const ProductSchema = new mongoose.Schema({
     required: true
   },
 
-  category:{
+  
+  features: {
+    type: [String],
+    default: []
+  },
+
+  category: {
     type: String,
     required: true
   }

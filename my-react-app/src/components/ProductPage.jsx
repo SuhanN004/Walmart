@@ -10,12 +10,11 @@ function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
 
-  
   const userId = localStorage.getItem("userId");
 
-  
   const fetchProduct = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/product/${id}`);
@@ -29,28 +28,21 @@ function ProductPage() {
     fetchProduct();
   }, []);
 
-  
   const getItemQty = () => {
     if (!product) return 0;
-
     const item = cartItems.find(i => i._id === product._id);
     return item ? item.qty : 0;
   };
 
-  
   const handleBuy = async () => {
     try {
-
       await axios.post(`${BASE_URL}/api/order/create`, {
-        userId: userId,   
-        items: [
-          { ...product, qty: 1 }
-        ],
+        userId: userId,
+        items: [{ ...product, qty: 1 }],
         totalAmount: product.price
       });
 
       alert("Product purchased successfully");
-
     } catch (err) {
       console.log(err);
       alert("Error purchasing product");
@@ -65,7 +57,7 @@ function ProductPage() {
 
       <div className="product-page">
 
-        
+        {/* LEFT - IMAGE */}
         <div className="product-left">
           <div className="main-image-box">
             <img
@@ -75,66 +67,65 @@ function ProductPage() {
           </div>
         </div>
 
-       
-        <div className="product-right">
+        {/* CENTER - DETAILS */}
+        <div className="product-center">
 
           <p className="brand">Visit Store</p>
 
           <h2 className="product-title">{product.name}</h2>
 
-          <p className="price">₹{product.price}</p>
+          {/* DESCRIPTION */}
+          <div className="desc-box">
+            <h3>Product Description</h3>
+            <p>{product.description}</p>
+          </div>
 
-          <p className="desc">{product.description}</p>
+          {/* FEATURES */}
+          {product.features && product.features.length > 0 && (
+            <div className="features-box">
+              <h3>Key Features</h3>
+              <ul>
+                {product.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          
-          <div className="cart-toggle">
+        </div>
+
+        {/* RIGHT - BUY BOX */}
+        <div className="product-right">
+
+          <div className="price-box">
+            <h2 className="price">₹{product.price}</h2>
+          </div>
+
+          <div className="cart-section">
 
             {getItemQty() === 0 ? (
-
               <button
                 className="add-btn"
                 onClick={() => addToCart(product)}
               >
-                Add To Cart
+                Add to cart
               </button>
-
             ) : (
-
               <div className="qty-box">
-
-                <button
-                  className="qty-btn"
-                  onClick={() => removeFromCart(product._id)}
-                >
-                  −
-                </button>
-
-                <span className="qty-text">
-                  {getItemQty()} added
-                </span>
-
-                <button
-                  className="qty-btn"
-                  onClick={() => addToCart(product)}
-                >
-                  +
-                </button>
-
+                <button onClick={() => removeFromCart(product._id)}>−</button>
+                <span>{getItemQty()}</span>
+                <button onClick={() => addToCart(product)}>+</button>
               </div>
-
             )}
 
+            <button
+              className="buy-btn"
+              onClick={handleBuy}
+            >
+              Buy Now
+            </button>
+
           </div>
-
-          
-          <button
-            className="buy-btn"
-            onClick={handleBuy}
-          >
-            Buy Now
-          </button>
-
-          
 
         </div>
 
