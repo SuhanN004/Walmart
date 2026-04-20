@@ -5,10 +5,16 @@ import "../styles/Productpage.css";
 import WalmartHeader from "./WalmartHeader";
 import { CartContext } from "../context/CartContext";
 
+import shipIcon from '../assets/dropship.png';
+import pickIcon from '../assets/droppick.png';
+import deliveryIcon from '../assets/dropdelivery.png';
+
 function ProductPage() {
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [deliveryType, setDeliveryType] = useState("shipping"); // 🔥 NEW
+
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
@@ -57,7 +63,7 @@ function ProductPage() {
 
       <div className="product-page">
 
-        {/* LEFT - IMAGE */}
+        
         <div className="product-left">
           <div className="main-image-box">
             <img
@@ -67,20 +73,20 @@ function ProductPage() {
           </div>
         </div>
 
-        {/* CENTER - DETAILS */}
+        
         <div className="product-center">
 
           <p className="brand">Visit Store</p>
 
           <h2 className="product-title">{product.name}</h2>
 
-          {/* DESCRIPTION */}
+          
           <div className="desc-box">
             <h3>Product Description</h3>
             <p>{product.description}</p>
           </div>
 
-          {/* FEATURES */}
+          
           {product.features && product.features.length > 0 && (
             <div className="features-box">
               <h3>Key Features</h3>
@@ -94,7 +100,7 @@ function ProductPage() {
 
         </div>
 
-        {/* RIGHT - BUY BOX */}
+        
         <div className="product-right">
 
           <div className="price-box">
@@ -103,6 +109,7 @@ function ProductPage() {
 
           <div className="cart-section">
 
+            
             {getItemQty() === 0 ? (
               <button
                 className="add-btn"
@@ -118,12 +125,61 @@ function ProductPage() {
               </div>
             )}
 
+            
             <button
               className="buy-btn"
               onClick={handleBuy}
             >
               Buy Now
             </button>
+
+            
+            <h4 className="delivery-title">How you'll get this item:</h4>
+
+            <div className="delivery-options">
+
+             
+              <div
+                className={`delivery-card ${deliveryType === "shipping" ? "active" : ""}`}
+                onClick={() => setDeliveryType("shipping")}
+              >
+                <div className="icon-circle">
+                  <img src={shipIcon} alt="shipping" />
+                </div>
+
+                <h4>Shipping</h4>
+                <p className="arrival">Arrives Apr 21</p>
+                <p className="time">Order within 8 hr 35 min</p>
+                <p className="free">Free</p>
+              </div>
+
+              
+              <div
+                className={`delivery-card ${deliveryType === "pickup" ? "active" : ""}`}
+                onClick={() => setDeliveryType("pickup")}
+              >
+                <div className="icon-circle">
+                  <img src={pickIcon} alt="pickup" />
+                </div>
+
+                <h4>Pickup</h4>
+                <p className="not">Not available</p>
+              </div>
+
+              
+              <div
+                className={`delivery-card ${deliveryType === "delivery" ? "active" : ""}`}
+                onClick={() => setDeliveryType("delivery")}
+              >
+                <div className="icon-circle">
+                  <img src={deliveryIcon} alt="delivery" />
+                </div>
+
+                <h4>Delivery</h4>
+                <p className="not">Not available</p>
+              </div>
+
+            </div>
 
           </div>
 

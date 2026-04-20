@@ -8,7 +8,7 @@
 }
 
 
-/* LEFT SIDE (IMAGE) */
+
 .product-left {
   flex: 1;
   display: flex;
@@ -203,4 +203,78 @@
   .main-image-box img {
     width: 300px;
   }
+}
+
+
+
+
+.delivery-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* CARD */
+.delivery-card {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 18px 12px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.25s ease;
+}
+
+/* ACTIVE CARD */
+.delivery-card.active {
+  border: 2px solid #1a1a1a;
+  background: #fff;
+}
+
+/* ICON CIRCLE */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  background: #e6eef6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+/* IMAGE */
+.icon-circle img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* TEXT */
+.delivery-card h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.arrival {
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.time {
+  color: green;
+  font-size: 14px;
+}
+
+.free {
+  color: green;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.not {
+  color: #666;
+  margin-top: 6px;
 }
