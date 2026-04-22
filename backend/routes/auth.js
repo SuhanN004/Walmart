@@ -8,11 +8,7 @@ route.post("/check-email", async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
 
-    if (user) {
-      return res.json({ exists: true });
-    } else {
-      return res.json({ exists: false });
-    }
+    res.json({ exists: !!user });
 
   } catch (err) {
     console.log(err);
@@ -36,10 +32,9 @@ route.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    
     res.json({
       message: "Login successful",
-      user: user   
+      user: user
     });
 
   } catch (err) {
@@ -47,6 +42,7 @@ route.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 
 route.post("/signup", async (req, res) => {
@@ -65,15 +61,33 @@ route.post("/signup", async (req, res) => {
 
     const newUser = await User.create(req.body);
 
-
     res.json({
       message: "Account created successfully",
-      user: newUser   
+      user: newUser
     });
 
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Error creating account" });
+  }
+});
+
+
+
+route.get("/user/:id", async (req, res) => {
+  try {
+
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
