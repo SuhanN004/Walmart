@@ -225,29 +225,6 @@
   cursor:pointer;
 }
 
-.w-item details {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-.w-item details:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-}
-
-.items details-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-.items details-icon:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-}
 
 
 .w-item span{
@@ -542,6 +519,34 @@
   }
 }
 
+
+
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.details-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.details span {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+
+.details:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
 
 
 
