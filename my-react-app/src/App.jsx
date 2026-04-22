@@ -16,7 +16,7 @@ import ViewProduct from "./AdminComponents/view-product";
 import AddService from "./AdminComponents/AddService";
 import ManageOrders from "./AdminComponents/ManageOrders";
 import AdminDashboard from "./AdminComponents/AdminDashboard";
-
+import MyDetails from "./components/MyDetails";
 
 function DummyPage({ title }) {
   return (
