@@ -38,43 +38,75 @@ function MyOrders() {
             <p>Start shopping and your orders will appear here</p>
           </div>
         ) : (
-          orders.map((order) => (
-            <div className="order-card" key={order._id}>
+          orders.map((order) => {
 
-              
-              <div className="order-header">
-                <span>Order ID: {order._id.slice(-6)}</span>
-                <span className="order-date">
-                  {new Date(order.createdAt).toLocaleDateString()}
-                </span>
-              </div>
+            const cgst = order.totalAmount * 0.09;
+            const sgst = order.totalAmount * 0.09;
+            const finalTotal = order.totalAmount + cgst + sgst;
 
-              
-              <div className="order-items">
-                {order.items.map((item, i) => (
-                  <div className="order-item" key={i}>
+            return (
+              <div className="order-card" key={order._id}>
 
-                    <div className="item-left">
-                      <div className="item-name">{item.name}</div>
-                      <div className="item-qty">Qty: {item.qty}</div>
+                {/* HEADER */}
+                <div className="order-header">
+                  <span>Order ID: {order._id.slice(-6)}</span>
+                  <span className="order-date">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+
+                {/* STATUS */}
+                <div className={`order-status ${order.status.toLowerCase()}`}>
+                  {order.status}
+                </div>
+
+                {/* ITEMS */}
+                <div className="order-items">
+                  {order.items.map((item, i) => (
+                    <div className="order-item" key={i}>
+
+                      <div className="item-left">
+                        <div className="item-name">{item.name}</div>
+                        <div className="item-qty">Qty: {item.qty}</div>
+                      </div>
+
+                      <div className="item-right">
+                        ₹{item.price * item.qty}
+                      </div>
+
                     </div>
+                  ))}
+                </div>
 
-                    <div className="item-right">
-                      ₹{item.price * item.qty}
-                    </div>
+                {/* TOTAL */}
+                <div className="order-footer">
+                  <span>Subtotal</span>
+                  <span className="total-price">₹{order.totalAmount}</span>
+                </div>
 
+                {/* GST BREAKDOWN */}
+                <div className="gst-box">
+
+                  <div className="gst-row">
+                    <span>CGST (9%)</span>
+                    <span>₹{cgst.toFixed(2)}</span>
                   </div>
-                ))}
-              </div>
 
-              
-              <div className="order-footer">
-                <span>Total</span>
-                <span className="total-price">₹{order.totalAmount}</span>
-              </div>
+                  <div className="gst-row">
+                    <span>SGST (9%)</span>
+                    <span>₹{sgst.toFixed(2)}</span>
+                  </div>
 
-            </div>
-          ))
+                  <div className="gst-total">
+                    <span>Total</span>
+                    <span>₹{finalTotal.toFixed(2)}</span>
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          })
         )}
 
       </div>

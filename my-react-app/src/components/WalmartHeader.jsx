@@ -10,16 +10,18 @@ import cartIcon from '../assets/add-to-cart.png'
 
 import magnifier from '../assets/magnifier copy.png'
 
-import {useNavigate} from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
-
 
 import { CartContext } from "../context/CartContext";
 
 function WalmartHeader() {
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+
   const [open, setOpen] = useState(false)
   const [searchActive, setSearchActive] = useState(false)
   const [deptOpen, setDeptOpen] = useState(false)
@@ -27,54 +29,47 @@ function WalmartHeader() {
 
   const [services, setServices] = useState([])
 
-
   const { cartItems } = useContext(CartContext);
 
-
   const totalItems = cartItems.reduce((total, item) => total + item.qty, 0);
-
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
 
+  // 🔥 PROFESSIONAL NAVIGATION FUNCTIONS
+  const goToHome = () => navigate("/home");
+  const goToCart = () => navigate("/cart");
+  const goToOrders = () => navigate("/orders");
 
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/service/view`)
-      setServices(res.data)
+      setServices(res.data);
     } catch (error) {
-      console.log("Error fetching services:", error)
+      console.log("Error fetching services:", error);
     }
   }
 
   useEffect(() => {
-    fetchServices()
+    fetchServices();
   }, [])
 
   return (
     <div className="w-header-wrapper">
 
-
+      {/* TOP HEADER */}
       <div className="w-header">
 
         <div className="w-left">
-          
 
-
-          <div 
-            className="w-item cart"
-            onClick={() => navigate("/home")}
-          >
+          {/* LOGO */}
+          <div className="w-item cart" onClick={goToHome}>
             <img src={logo} alt="walmart" className="w-logo" />
-
           </div>
 
-
-
-
-
+          {/* LOCATION BOX */}
           <div className="pickup-box" onClick={() => setOpen(!open)}>
 
             <div className="pickup-icon">
@@ -95,7 +90,7 @@ function WalmartHeader() {
           </div>
         </div>
 
-
+        {/* SEARCH */}
         <div className={`w-search ${searchActive ? 'active' : ''}`}>
           <input
             type="text"
@@ -108,55 +103,49 @@ function WalmartHeader() {
           </button>
         </div>
 
-
+        {/* RIGHT SIDE */}
         <div className="w-right">
 
+          {/* MY ORDERS */}
           <div
-            className="w-item my-orders"
-            onClick={() => navigate("/orders")}
+            className={`w-item my-orders ${
+              location.pathname === "/orders" ? "active-nav" : ""
+            }`}
+            onClick={goToOrders}
           >
             <img
               src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
               alt="orders"
               className="orders-icon"
             />
-
             <span>
               My<br />Orders
             </span>
           </div>
 
-
+          {/* ACCOUNT */}
           <div className="w-item">
             <span>Sign In<br />Account</span>
           </div>
 
-
-          <div 
-            className="w-item cart"
-            onClick={() => navigate("/cart")}
-          >
-
+          {/* CART */}
+          <div className="w-item cart" onClick={goToCart}>
             <img src={cartIcon} alt="cart" className="cart-icon" />
 
-            
             {totalItems > 0 && (
               <span className="cart-count">{totalItems}</span>
             )}
 
-            
             <span>₹{totalPrice}</span>
-
           </div>
 
         </div>
-
       </div>
 
-
+      {/* OVERLAY */}
       {open && <div className="header-overlay" onClick={() => setOpen(false)} />}
 
-
+      {/* DROPDOWN */}
       <div className={`pickup-dropdown ${open ? 'show' : ''}`}>
 
         <div className="pickup-options">
@@ -199,7 +188,7 @@ function WalmartHeader() {
 
       </div>
 
-
+      {/* NAV BAR */}
       <div className="w-nav">
 
         <div className="w-nav-left">
@@ -226,22 +215,26 @@ function WalmartHeader() {
             </div>
           )}
 
-
-
           <button className="nav-btn">Get it Fast</button>
           <button className="nav-btn">Rollbacks & More</button>
           <button className="nav-btn">Valentine's Day</button>
           <button className="nav-btn">Virtual Care</button>
-
-
           <button className="nav-btn">New Arrivals</button>
           <button className="nav-btn">bettergoods</button>
           <button className="nav-btn">Walmart+</button>
 
         </div>
 
+        {/* 🔥 RIGHT SIDE NAV (REPLACED) */}
         <div className="w-nav-right">
-          <button className="nav-btn bold">More ▾</button>
+          <button
+            className={`nav-btn bold ${
+              location.pathname === "/orders" ? "active-nav" : ""
+            }`}
+            onClick={goToOrders}
+          >
+            My Orders
+          </button>
         </div>
 
       </div>
