@@ -103,10 +103,10 @@ function WalmartHeader() {
           </button>
         </div>
 
-        {/* RIGHT SIDE */}
+        
         <div className="w-right">
 
-          {/* MY ORDERS */}
+          
           <div
             className={`w-item my-orders ${
               location.pathname === "/orders" ? "active-nav" : ""
@@ -123,12 +123,12 @@ function WalmartHeader() {
             </span>
           </div>
 
-          {/* ACCOUNT */}
+          
           <div className="w-item">
-            <span>Sign In<br />Account</span>
+            <span>My Details<br />Account</span>
           </div>
 
-          {/* CART */}
+          
           <div className="w-item cart" onClick={goToCart}>
             <img src={cartIcon} alt="cart" className="cart-icon" />
 
@@ -142,10 +142,10 @@ function WalmartHeader() {
         </div>
       </div>
 
-      {/* OVERLAY */}
+      
       {open && <div className="header-overlay" onClick={() => setOpen(false)} />}
 
-      {/* DROPDOWN */}
+
       <div className={`pickup-dropdown ${open ? 'show' : ''}`}>
 
         <div className="pickup-options">
@@ -188,7 +188,7 @@ function WalmartHeader() {
 
       </div>
 
-      {/* NAV BAR */}
+      
       <div className="w-nav">
 
         <div className="w-nav-left">
@@ -225,7 +225,7 @@ function WalmartHeader() {
 
         </div>
 
-        {/* 🔥 RIGHT SIDE NAV (REPLACED) */}
+        
         <div className="w-nav-right">
           <button
             className={`nav-btn bold ${
