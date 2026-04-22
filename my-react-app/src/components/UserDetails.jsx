@@ -9,11 +9,7 @@ import "../styles/UserDetails.css";
 
 function UserDetails() {
 
-    const statusColors = {
-    "Delivered": "#4caf50",
-    "Pending": "#024c9a",
-    "Cancelled": "#f44336"
-  };
+   
 
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
   const userId = localStorage.getItem("userId");
@@ -131,7 +127,7 @@ function UserDetails() {
           <h3>Order Status</h3>
           <PieChart width={300} height={300}>
             <Pie data={pieData} dataKey="value" outerRadius={100} label>
-              {pieData.statusColors.map((_, i) => (
+              {pieData.map((_, i) => (
                 <Cell key={i} fill={COLORS[i]} />
               ))}
               
