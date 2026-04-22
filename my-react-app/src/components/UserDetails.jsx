@@ -128,7 +128,9 @@ function UserDetails() {
               {pieData.map((_, i) => (
                 <Cell key={i} fill={COLORS[i]} />
               ))}
+              
             </Pie>
+              <legend/>
           </PieChart>
         </div>
 
