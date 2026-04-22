@@ -73,21 +73,21 @@ function AdminDashboard() {
   return (
     <div className="dashboard-container">
 
-      <h1>Admin Dashboard</h1>
+      <h1 className="dashboard-title">Admin Dashboard</h1>
 
       <div className="dashboard-grid">
 
-        <div className="card"><p>Products</p><h2>{data.products}</h2></div>
-        <div className="card"><p>Services</p><h2>{data.services}</h2></div>
-        <div className="card"><p>Users</p><h2>{data.users}</h2></div>
+        <div className="card"><p className="card-title">Products</p><h2>{data.products}</h2></div>
+        <div className="card"><p className="card-title">Services</p><h2>{data.services}</h2></div>
+        <div className="card"><p className="card-title">Users</p><h2>{data.users}</h2></div>
 
-        <div className="card"><p>Total Orders</p><h2>{data.orders}</h2></div>
-        <div className="card"><p>Payments</p><h2>{data.payments}</h2></div>
-        <div className="card"><p>Pending Orders</p><h2>{data.pending}</h2></div>
+        <div className="card"><p className="card-title">Total Orders</p><h2>{data.orders}</h2></div>
+        <div className="card"><p className="card-title">Payments</p><h2>{data.payments}</h2></div>
+        <div className="card"><p className="card-title">Pending Orders</p><h2>{data.pending}</h2></div>
 
-        <div className="card"><p>Sales Today</p><h2>{data.today}</h2></div>
-        <div className="card"><p>Sales Month</p><h2>{data.month}</h2></div>
-        <div className="card"><p>Sales Year</p><h2>{data.year}</h2></div>
+        <div className="card"><p className="card-title">Sales Today</p><h2>{data.today}</h2></div>
+        <div className="card"><p className="card-title">Sales Month</p><h2>{data.month}</h2></div>
+        <div className="card"><p className="card-title">Sales Year</p><h2>{data.year}</h2></div>
 
       </div>
 
