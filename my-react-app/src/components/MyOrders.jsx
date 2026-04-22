@@ -47,7 +47,7 @@ function MyOrders() {
             return (
               <div className="order-card" key={order._id}>
 
-                {/* HEADER */}
+                
                 <div className="order-header">
                   <span>Order ID: {order._id.slice(-6)}</span>
                   <span className="order-date">
@@ -55,12 +55,12 @@ function MyOrders() {
                   </span>
                 </div>
 
-                {/* STATUS */}
+                
                 <div className={`order-status ${order.status.toLowerCase()}`}>
                   {order.status}
                 </div>
 
-                {/* ITEMS */}
+                
                 <div className="order-items">
                   {order.items.map((item, i) => (
                     <div className="order-item" key={i}>
@@ -78,7 +78,7 @@ function MyOrders() {
                   ))}
                 </div>
 
-                {/* TOTAL */}
+                
                 <div className="order-footer">
                   <span>Subtotal</span>
                   <span className="total-price">₹{order.totalAmount}</span>

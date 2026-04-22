@@ -92,20 +92,20 @@ function UserDetails() {
     { name: "Cancelled", value: stats.cancelled }
   ];
 
-  const COLORS = ["#4caf50", "#ff9800", "#f44336"];
+  const COLORS = ["#4caf50", "#024c9a", "#f44336"];
 
   return (
     <div className="user-container">
 
       <h1>Welcome, {user.firstName}</h1>
 
-      {/* USER INFO */}
+      
       <div className="user-info">
         <p><b>Email:</b> {user.email}</p>
         <p><b>Phone:</b> {user.phone}</p>
       </div>
 
-      {/* STATS */}
+      
       <div className="stats-grid">
 
         <div className="card"><p>Total Orders</p><h2>{stats.orders}</h2></div>
@@ -118,7 +118,7 @@ function UserDetails() {
 
       </div>
 
-      {/* CHARTS */}
+      
       <div className="charts">
 
         <div className="chart-box">
@@ -138,7 +138,7 @@ function UserDetails() {
             <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="amount" fill="#ff9800" />
+            <Bar dataKey="amount" fill="#0275cd" />
           </BarChart>
         </div>
 

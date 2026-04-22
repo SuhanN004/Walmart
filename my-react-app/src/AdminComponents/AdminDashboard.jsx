@@ -52,7 +52,7 @@ function AdminDashboard() {
       setData({
         products: productsRes.data.length,
         services: servicesRes.data.length,
-        users: 1, // (future: create API)
+        users: 3, // (future: create API)
         orders: orders.length,
         payments: orders.length,
         pending,
