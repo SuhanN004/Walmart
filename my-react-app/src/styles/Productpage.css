@@ -210,15 +210,17 @@
 
 .delivery-options {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-top: 15px;
+  width: 100%;
 }
 
-/* CARD */
+
 .delivery-card {
-  flex: 1;
+  flex: 1; /* THIS FIXES OVERFLOW */
+  min-width: 0; /* VERY IMPORTANT */
   background: #f5f5f5;
-  padding: 18px 12px;
+  padding: 14px 10px;
   border-radius: 16px;
   text-align: center;
   cursor: pointer;
@@ -226,13 +228,13 @@
   transition: 0.25s ease;
 }
 
-/* ACTIVE CARD */
+
 .delivery-card.active {
   border: 2px solid #1a1a1a;
   background: #fff;
 }
 
-/* ICON CIRCLE */
+
 .icon-circle {
   width: 60px;
   height: 60px;
@@ -244,14 +246,14 @@
   margin: 0 auto 10px;
 }
 
-/* IMAGE */
+
 .icon-circle img {
   width: 30px;
   height: 30px;
   object-fit: contain;
 }
 
-/* TEXT */
+
 .delivery-card h4 {
   font-size: 18px;
   margin-bottom: 5px;
@@ -277,4 +279,38 @@
 .not {
   color: #666;
   margin-top: 6px;
+}
+
+
+.product-right {
+  width: 320px;
+  overflow: hidden; 
+}
+
+
+
+.delivery-card.active {
+  border: 2px solid #1a1a1a;
+  background: #ffffff;
+  transform: scale(1.03);
+}
+
+
+.delivery-card:not(.active) {
+  opacity: 0.5;
+}
+
+
+.delivery-card:hover {
+  opacity: 1;
+}
+
+
+.delivery-card.active .icon-circle {
+  background: #dbeafe;
+}
+
+.delivery-card.active h4 {
+  color: #000;
+  font-weight: 700;
 }
