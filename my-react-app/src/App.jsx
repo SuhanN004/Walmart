@@ -15,7 +15,7 @@ import AddProduct from "./AdminComponents/add-product";
 import ViewProduct from "./AdminComponents/view-product";
 import AddService from "./AdminComponents/AddService";
 import ManageOrders from "./AdminComponents/ManageOrders";
-
+import AdminDashboard from "./AdminComponents/AdminDashboard";
 
 
 function DummyPage({ title }) {
@@ -55,7 +55,7 @@ function App() {
       <Route path="/admin/view-product" element={<ViewProduct />} />
       <Route path="/admin/add-service" element={<AddService />} />
       <Route path="/admin/orders" element={<ManageOrders />} />
-
+      <Route path="/admin/dashboard" element={<AdminDashboard />} />
     </Routes>
   );
 }

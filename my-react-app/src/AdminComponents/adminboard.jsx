@@ -42,6 +42,12 @@ function AdminBoard() {
         >
           Manage Orders
         </button>
+        <button
+          className="admin-btn"
+          onClick={() => navigate("/admin/dashboard")}
+        >
+          Dashboard
+        </button>
 
 
       </div>
