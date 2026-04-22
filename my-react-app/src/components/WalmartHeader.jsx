@@ -125,7 +125,7 @@ function WalmartHeader() {
 
           
           <div className="w-item">
-            <span>My Details<br />Account</span>
+            <span>My Details<br /></span>
           </div>
 
           
