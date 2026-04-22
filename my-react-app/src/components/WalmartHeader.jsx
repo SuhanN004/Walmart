@@ -129,7 +129,7 @@ function WalmartHeader() {
           
           <div className="w-item details" onClick={goToDetails}>
             <img src={details} alt="Details" className="details-icon" />
-            <span>My Details<br /></span>
+            <span>My <br />Details</span>
           </div>
 
           
