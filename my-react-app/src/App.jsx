@@ -16,8 +16,7 @@ import ViewProduct from "./AdminComponents/view-product";
 import AddService from "./AdminComponents/AddService";
 import ManageOrders from "./AdminComponents/ManageOrders";
 import AdminDashboard from "./AdminComponents/AdminDashboard";
-import MyDetails from "./components/MyDetails";
-
+import UserDetails from "./components/UserDetails";
 function DummyPage({ title }) {
   return (
     <div style={{ padding: "120px", fontSize: "24px" }}>
@@ -40,7 +39,7 @@ function App() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/orders" element={<MyOrders />} />
-      <Route path="/details" element={<MyDetails />} />
+      <Route path="/user/details" element={<UserDetails />} />
       
       <Route path="/auto-service" element={<DummyPage title="Auto Service Page" />} />
       <Route path="/cashback" element={<DummyPage title="Cashback Page" />} />

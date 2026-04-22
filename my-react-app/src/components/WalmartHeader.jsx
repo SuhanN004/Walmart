@@ -45,7 +45,7 @@ function WalmartHeader() {
   const goToHome = () => navigate("/home");
   const goToCart = () => navigate("/cart");
   const goToOrders = () => navigate("/orders");
-  const goToDetails = () => navigate("/details");
+  const goToDetails = () => navigate("/user/details");
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/service/view`)
