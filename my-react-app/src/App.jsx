@@ -40,7 +40,7 @@ function App() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/orders" element={<MyOrders />} />
-
+      <Route path="/details" element={<DummyPage title="My Details Page" />} />
       
       <Route path="/auto-service" element={<DummyPage title="Auto Service Page" />} />
       <Route path="/cashback" element={<DummyPage title="Cashback Page" />} />

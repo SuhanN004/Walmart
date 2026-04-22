@@ -10,6 +10,9 @@ import cartIcon from '../assets/add-to-cart.png'
 
 import magnifier from '../assets/magnifier copy.png'
 
+import details from '../assets/details.png'
+
+
 import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 
@@ -38,11 +41,11 @@ function WalmartHeader() {
     0
   );
 
-  // 🔥 PROFESSIONAL NAVIGATION FUNCTIONS
+  
   const goToHome = () => navigate("/home");
   const goToCart = () => navigate("/cart");
   const goToOrders = () => navigate("/orders");
-
+  const goToDetails = () => navigate("/details");
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/service/view`)
@@ -59,17 +62,17 @@ function WalmartHeader() {
   return (
     <div className="w-header-wrapper">
 
-      {/* TOP HEADER */}
+      
       <div className="w-header">
 
         <div className="w-left">
 
-          {/* LOGO */}
+          
           <div className="w-item cart" onClick={goToHome}>
             <img src={logo} alt="walmart" className="w-logo" />
           </div>
 
-          {/* LOCATION BOX */}
+          
           <div className="pickup-box" onClick={() => setOpen(!open)}>
 
             <div className="pickup-icon">
@@ -90,7 +93,7 @@ function WalmartHeader() {
           </div>
         </div>
 
-        {/* SEARCH */}
+       
         <div className={`w-search ${searchActive ? 'active' : ''}`}>
           <input
             type="text"
@@ -124,7 +127,8 @@ function WalmartHeader() {
           </div>
 
           
-          <div className="w-item">
+          <div className="w-item details" onClick={goToDetails}>
+            <img src={details} alt="Details" className="details-icon" />
             <span>My Details<br /></span>
           </div>
 
