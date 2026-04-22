@@ -147,7 +147,7 @@ function ProductPage() {
                   <img src={shipIcon} alt="shipping" />
                 </div>
 
-                <h4>Shipping</h4>
+                <h5>Shipping</h5>
                 <p className="arrival">Arrives Apr 21</p>
                 <p className="time">Order within 8 hr 35 min</p>
                 <p className="free">Free</p>
@@ -162,7 +162,7 @@ function ProductPage() {
                   <img src={pickIcon} alt="pickup" />
                 </div>
 
-                <h4>Pickup</h4>
+                <h5>Pickup</h5>
                 <p className="not">Not available</p>
               </div>
 
@@ -175,7 +175,7 @@ function ProductPage() {
                   <img src={deliveryIcon} alt="delivery" />
                 </div>
 
-                <h4>Delivery</h4>
+                <h5>Delivery</h5>
                 <p className="not">Not available</p>
               </div>
 
