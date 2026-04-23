@@ -4,16 +4,19 @@ const User = require("../model/User");
 const sendMail = require("../utils/sendMail");
 
 
+const generateGSTInvoice = require("../utils/gstInvoice");
+
+
 
 route.post("/create", async (req, res) => {
   try {
     const { items, totalAmount, userId } = req.body;
 
-    
     if (!items || !totalAmount || !userId) {
       return res.status(400).json({ message: "Missing fields" });
     }
 
+    
     const formattedItems = items.map(item => ({
       productId: item._id,
       name: item.name,
@@ -21,6 +24,7 @@ route.post("/create", async (req, res) => {
       qty: item.qty
     }));
 
+    
     const order = new Order({
       userId,
       items: formattedItems,
@@ -32,37 +36,43 @@ route.post("/create", async (req, res) => {
 
     const user = await User.findById(userId);
 
-    console.log(" USER:", user);
+    console.log("USER:", user);
 
     
     if (user && user.email) {
       try {
+
+        
+        const filePath = await generateGSTInvoice(order, user);
+
+        
         await sendMail(
           user.email,
-          "Order Placed",
+          "Order Confirmed with GST Invoice",
           `Hi ${user.firstName},
 
 Your order of ₹${totalAmount} has been placed successfully.
 
-We will notify you when it is shipped.
+Please find your GST invoice attached.
 
-Thank you `
+Thank you for shopping with us `,
+          filePath 
         );
+
       } catch (mailErr) {
-        console.log(" Mail failed:", mailErr);
+        console.log("Mail failed:", mailErr);
       }
     } else {
-      console.log(" User email not found");
+      console.log("User email not found");
     }
 
     res.status(201).json({ message: "Order stored in DB" });
 
   } catch (err) {
-    console.log(" ORDER ERROR:", err);
+    console.log("ORDER ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
-
 
 
 
@@ -71,12 +81,10 @@ route.get("/user/:userId", async (req, res) => {
     const orders = await Order.find({ userId: req.params.userId });
     res.json(orders);
   } catch (err) {
-    console.log(" FETCH USER ORDERS ERROR:", err);
+    console.log("FETCH USER ORDERS ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
-
-
 
 
 route.get("/all", async (req, res) => {
@@ -84,11 +92,10 @@ route.get("/all", async (req, res) => {
     const orders = await Order.find();
     res.json(orders);
   } catch (err) {
-    console.log(" FETCH ALL ORDERS ERROR:", err);
+    console.log("FETCH ALL ORDERS ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
-
 
 
 
@@ -112,8 +119,9 @@ route.put("/update-status/:id", async (req, res) => {
 
     const user = await User.findById(order.userId);
 
-    console.log(" USER FOR STATUS:", user);
+    console.log("USER FOR STATUS:", user);
 
+    
     if (user && user.email) {
       try {
 
@@ -148,15 +156,16 @@ Your order of ₹${order.totalAmount} is now pending.
 
 We will notify you when there is an update.
 
-Thank you `;
+Thank you`;
         }
 
+        
         if (subject && message) {
           await sendMail(user.email, subject, message);
         }
 
       } catch (mailErr) {
-        console.log(" Status Mail failed:", mailErr);
+        console.log("Status Mail failed:", mailErr);
       }
     } else {
       console.log("User email not found for status update");
@@ -165,10 +174,9 @@ Thank you `;
     res.json(order);
 
   } catch (err) {
-    console.log(" UPDATE STATUS ERROR:", err);
+    console.log("UPDATE STATUS ERROR:", err);
     res.status(500).json({ message: err.message });
   }
 });
-
 
 module.exports = route;
