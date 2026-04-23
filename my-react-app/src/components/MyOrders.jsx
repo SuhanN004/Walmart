@@ -6,13 +6,13 @@ import "../styles/MyOrders.css";
 function MyOrders() {
 
   const [orders, setOrders] = useState([]);
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api = import.meta.env.VITE_API;
   const userId = localStorage.getItem("userId");
 
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `${BASE_URL}/api/order/user/${userId}`
+        `${api}/api/order/user/${userId}`
       );
       setOrders(res.data);
     } catch (err) {

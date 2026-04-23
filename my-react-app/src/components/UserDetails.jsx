@@ -11,7 +11,7 @@ function UserDetails() {
 
    
 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api= import.meta.env.VITE_API;
   const userId = localStorage.getItem("userId");
 
   const [user, setUser] = useState({});
@@ -21,7 +21,7 @@ function UserDetails() {
     spent: 0,
     delivered: 0,
     pending: 0,
-    cancelled: 0
+    shipped: 0
   });
 
   const [monthlyData, setMonthlyData] = useState([]);
@@ -30,8 +30,8 @@ function UserDetails() {
     try {
 
       const [userRes, ordersRes] = await Promise.all([
-        axios.get(`${BASE_URL}/api/auth/user/${userId}`),
-        axios.get(`${BASE_URL}/api/order/user/${userId}`)
+        axios.get(`${api}/api/auth/user/${userId}`),
+        axios.get(`${api}/api/order/user/${userId}`)
       ]);
 
       const orders = ordersRes.data;
@@ -40,7 +40,7 @@ function UserDetails() {
       let spent = 0;
       let delivered = 0;
       let pending = 0;
-      let cancelled = 0;
+      let shipped = 0;
 
       const monthlyMap = {};
 
@@ -59,7 +59,7 @@ function UserDetails() {
 
         if (order.status === "Delivered") delivered++;
         if (order.status === "Pending") pending++;
-        if (order.status === "Cancelled") cancelled++;
+        if (order.status === "Shipping") shipped++;
       });
 
       const monthlyArray = Object.keys(monthlyMap).map(m => ({
@@ -76,7 +76,7 @@ function UserDetails() {
         spent,
         delivered,
         pending,
-        cancelled
+        shipped
       });
 
     } catch (err) {
@@ -91,10 +91,10 @@ function UserDetails() {
   const pieData = [
     { name: "Delivered", value: stats.delivered },
     { name: "Pending", value: stats.pending },
-    { name: "Cancelled", value: stats.cancelled }
+    { name: "Shipped", value: stats.shipped }
   ];
 
-  const COLORS = ["#4caf50", "#024c9a", "#f44336"];
+  const COLORS = ["#4caf50", "#0a77ec", "#f44336"];
 
   return (
     <div className="user-container">
@@ -116,7 +116,7 @@ function UserDetails() {
 
         <div className="card"><p>Delivered</p><h2>{stats.delivered}</h2></div>
         <div className="card"><p>Pending</p><h2>{stats.pending}</h2></div>
-        <div className="card"><p>Cancelled</p><h2>{stats.cancelled}</h2></div>
+        <div className="card"><p>Shipped</p><h2>{stats.shipped}</h2></div>
 
       </div>
 
@@ -142,7 +142,7 @@ function UserDetails() {
             <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="amount" fill="#0275cd" />
+            <Bar dataKey="amount" fill="#0d8ae9" />
           </BarChart>
         </div>
 

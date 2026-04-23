@@ -10,7 +10,7 @@ function CartPage() {
 
   const { cartItems, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api = import.meta.env.VITE_API;
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
@@ -48,7 +48,7 @@ function CartPage() {
                 <div className="cart-item" key={item._id}>
 
                   <img
-                    src={`${BASE_URL}/uploads/${item.image}`}
+                    src={`${api}/uploads/${item.image}`}
                     alt="product"
                   />
 

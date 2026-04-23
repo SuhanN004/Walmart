@@ -13,9 +13,9 @@ function ProductPage() {
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [deliveryType, setDeliveryType] = useState("shipping"); // 🔥 NEW
+  const [deliveryType, setDeliveryType] = useState("shipping"); 
 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api= import.meta.env.VITE_API;
 
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
 
@@ -23,7 +23,7 @@ function ProductPage() {
 
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/product/${id}`);
+      const res = await axios.get(`${api}/api/product/${id}`);
       setProduct(res.data);
     } catch (err) {
       console.log(err);
@@ -42,7 +42,7 @@ function ProductPage() {
 
   const handleBuy = async () => {
     try {
-      await axios.post(`${BASE_URL}/api/order/create`, {
+      await axios.post(`${api}/api/order/create`, {
         userId: userId,
         items: [{ ...product, qty: 1 }],
         totalAmount: product.price
@@ -67,7 +67,7 @@ function ProductPage() {
         <div className="product-left">
           <div className="main-image-box">
             <img
-              src={`${BASE_URL}/uploads/${product.image}`}
+              src={`${api}/uploads/${product.image}`}
               alt="product"
             />
           </div>

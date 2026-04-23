@@ -9,11 +9,14 @@
   text-align: center;
 }
 
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
+
 
 .card {
   background: white;
@@ -21,6 +24,11 @@
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   text-align: center;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card p {
@@ -33,11 +41,14 @@
   font-size: 28px;
 }
 
+
+
+
 .dashboard-title {
   color: #333;
   font-weight: 700;
   font-size: 28px;
-  font-family:'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .card-title {
@@ -45,5 +56,54 @@
   font-weight: 600;
   color: #555;
   margin-bottom: 8px;
-  font-family:'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.chart-box {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+}
+
+.chart-box:hover {
+  transform: translateY(-5px);
+}
+
+.chart-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #444;
+  font-weight: 600;
+}
+
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
 }

@@ -16,7 +16,7 @@ function AddProduct() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
 
-  // 🔥 NEW (FEATURES)
+  
   const [features, setFeatures] = useState("");
 
   const api = import.meta.env.VITE_API;
@@ -49,7 +49,7 @@ function AddProduct() {
       formData.append("description", description);
       formData.append("category", category);
 
-      // 🔥 SEND FEATURES AS ARRAY
+      
       const featuresArray = features
         .split(",")
         .map(f => f.trim())
@@ -117,7 +117,7 @@ function AddProduct() {
             onChange={(e) => setStock(e.target.value)}
           />
 
-          {/* CATEGORY */}
+          
           <div className="category-select">
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="">Select Category</option>
@@ -129,14 +129,14 @@ function AddProduct() {
             </select>
           </div>
 
-          {/* DESCRIPTION */}
+          
           <textarea
             placeholder="Product Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          {/* 🔥 FEATURES INPUT */}
+          
           <textarea
             placeholder="Enter features (comma separated) 
 Example: Fast charging, Lightweight, 16GB RAM"
@@ -144,7 +144,7 @@ Example: Fast charging, Lightweight, 16GB RAM"
             onChange={(e) => setFeatures(e.target.value)}
           />
 
-          {/* IMAGE */}
+          
           <input
             type="file"
             accept="image/*"

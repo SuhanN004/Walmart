@@ -12,10 +12,10 @@ function Home() {
 
   const [products, setProducts] = useState([]);
   const navigate = useNavigate(); 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api = import.meta.env.VITE_API;
   const fetchProducts = async () => {
     try {
-       const res = await axios.get(`${BASE_URL}/api/product/view`);
+       const res = await axios.get(`${api}/api/product/view`);
       setProducts(res.data);
     } catch (err) {
       console.log(err);
@@ -45,7 +45,7 @@ function Home() {
               onClick={() => navigate(`/product/${product._id}`)}
             >
 
-              <img src={`${BASE_URL}/uploads/${product.image}`} alt="product" />
+              <img src={`${api}/uploads/${product.image}`} alt="product" />
 
               
 

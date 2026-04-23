@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
-import toast from "react-hot-toast"; // 🔥 ADD THIS
+import toast from "react-hot-toast";
 
 import "../styles/CheckoutPage.css";
 import cardImage from "../assets/cards.jpg";
@@ -19,14 +19,15 @@ import cardImage from "../assets/cards.jpg";
 function CheckoutPage() {
 
   const stripe = useStripe();
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
-
   const elements = useElements();
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { cartItems, clearCart } = useContext(CartContext);
 
+  const api = import.meta.env.VITE_API;
+
+  
   const total =
     location.state?.total ||
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
@@ -39,6 +40,19 @@ function CheckoutPage() {
 
     if (!stripe || !elements) return;
 
+    if (!api) {
+      console.error(" VITE_API not defined");
+      toast.error("Server configuration error");
+      return;
+    }
+
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      toast.error("User not logged in ");
+      return;
+    }
+
     if (!total || total <= 0) {
       setError("Invalid amount");
       return;
@@ -49,8 +63,9 @@ function CheckoutPage() {
 
     try {
 
+      
       const res = await axios.post(
-        `${BASE_URL}/api/payment/create-payment`,
+        `${api}/api/payment/create-payment`,
         { amount: total }
       );
 
@@ -64,6 +79,7 @@ function CheckoutPage() {
         return;
       }
 
+      
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
@@ -72,34 +88,38 @@ function CheckoutPage() {
 
       if (result.error) {
         setError(result.error.message);
-        toast.error(result.error.message); // 🔥 ERROR TOAST
+        toast.error(result.error.message);
         setLoading(false);
         return;
       }
 
+      
       if (result.paymentIntent.status === "succeeded") {
 
-        await axios.post(`${BASE_URL}/api/order/create`, {
-          userId: localStorage.getItem("userId"),
+        // prevent multiple clicks
+        setLoading(true);
+
+        await axios.post(`${api}/api/order/create`, {
+          userId: userId,
           items: cartItems,
           totalAmount: total
         });
 
         clearCart();
 
-        // 🔥 SUCCESS TOAST
+        
         toast.success("Order placed! Invoice sent to your email 📩");
 
-        // 🔥 DELAY FOR BETTER UX
+        
         setTimeout(() => {
           navigate("/orders");
         }, 1500);
       }
 
     } catch (err) {
-      console.log(err);
+      console.log(" PAYMENT ERROR:", err.response?.data || err.message);
       setError("Payment failed. Try again.");
-      toast.error("Payment failed. Try again ❌");
+      toast.error("Payment failed. Try again ");
     }
 
     setLoading(false);
@@ -108,6 +128,7 @@ function CheckoutPage() {
   return (
     <div className="checkout-container">
 
+      {/* LEFT SIDE */}
       <div className="checkout-left">
 
         <h2>Payment Method</h2>
@@ -145,6 +166,7 @@ function CheckoutPage() {
         </form>
       </div>
 
+      {/* RIGHT SIDE */}
       <div className="checkout-right">
 
         <h3>Order Summary</h3>
@@ -154,7 +176,7 @@ function CheckoutPage() {
           <p>Delivery: Free</p>
           <h2>Total: ₹{total}</h2>
 
-          <button className="summary-btn">
+          <button className="summary-btn" disabled>
             Payment
           </button>
         </div>

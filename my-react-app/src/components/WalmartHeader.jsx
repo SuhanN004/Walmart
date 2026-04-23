@@ -23,7 +23,7 @@ function WalmartHeader() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api= import.meta.env.VITE_API;
 
   const [open, setOpen] = useState(false)
   const [searchActive, setSearchActive] = useState(false)
@@ -48,7 +48,7 @@ function WalmartHeader() {
   const goToDetails = () => navigate("/user/details");
   const fetchServices = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/service/view`)
+      const res = await axios.get(`${api}/api/service/view`)
       setServices(res.data);
     } catch (error) {
       console.log("Error fetching services:", error);

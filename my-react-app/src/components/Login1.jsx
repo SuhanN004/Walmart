@@ -12,7 +12,7 @@ import axios from "axios";
 function Login1() {
   const navigate = useNavigate();
 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api = import.meta.env.VITE_API;
 
   
   const [email,setEmail] =useState("");
@@ -29,7 +29,7 @@ const handleContinue = async () => {
   }
 
   try {
-    const res = await axios.post(`${BASE_URL}/api/auth/check-email`, { email: email});
+    const res = await axios.post(`${api}/api/auth/check-email`, { email: email});
 
     if (res.data.exists) {
     
@@ -53,7 +53,7 @@ const handleContinue = async () => {
   }
 
   try {
-    const res = await axios.post(`${BASE_URL}/api/auth/login`, {
+    const res = await axios.post(`${api}/api/auth/login`, {
       email: email,
       password: password
     });

@@ -12,7 +12,7 @@ function Login2() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const BASE_URL = "https://walmart-3-ysdt.onrender.com";
+  const api = import.meta.env.VITE_API;
   
   const email = location.state?.email || "";
 
@@ -37,7 +37,7 @@ const handleSignup = async () => {
 
   try {
 
-    const res = await axios.post(`${BASE_URL}/api/auth/signup`, {
+    const res = await axios.post(`${api}/api/auth/signup`, {
       email,
       firstName,
       lastName,
