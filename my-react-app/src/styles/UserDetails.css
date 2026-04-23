@@ -1,6 +1,8 @@
 .user-container {
   padding: 40px;
   background: #f5f6fa;
+  min-height: 100vh;
+  padding-top: 100px;
 }
 
 .user-info {
@@ -30,4 +32,24 @@
   background: white;
   padding: 20px;
   border-radius: 12px;
+  flex: 0.5;
+  
+}
+
+
+.user-title {
+  margin-bottom: 30px;
+  font-size: 45px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  color: #000000;
+
+}
+
+
+.user-info p {
+  font-size: 20px;
+  color: #020202;
+  margin: 8px 0;
+  font-family: 'Open Sans', sans-serif;
 }

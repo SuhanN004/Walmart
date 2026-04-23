@@ -31,6 +31,10 @@
 }
 
 
+.cart-right .checkout-btn {
+  margin-top: 20px;
+}
+
 .cart-item {
   display: flex;
   gap: 20px;

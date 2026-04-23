@@ -73,6 +73,17 @@ route.post("/signup", async (req, res) => {
 });
 
 
+route.get("/all", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 
 route.get("/user/:id", async (req, res) => {
   try {

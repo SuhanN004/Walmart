@@ -5,7 +5,8 @@ import "../AdminStyles/AdminDashboard.css";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
   PieChart, Pie, Cell, Legend,
-  ResponsiveContainer
+  ResponsiveContainer, Line,
+  LineChart
 } from "recharts";
 
 function AdminDashboard() {
@@ -27,10 +28,11 @@ function AdminDashboard() {
   const fetchData = async () => {
     try {
 
-      const [productsRes, servicesRes, ordersRes] = await Promise.all([
+      const [productsRes, servicesRes, ordersRes, usersRes] = await Promise.all([
         axios.get(`${api}/api/product/view`),
         axios.get(`${api}/api/service/view`),
-        axios.get(`${api}/api/order/all`)
+        axios.get(`${api}/api/order/all`),
+        axios.get(`${api}/api/auth/all`)
       ]);
 
       const orders = ordersRes.data;
@@ -54,7 +56,7 @@ function AdminDashboard() {
       setData({
         products: productsRes.data.length,
         services: servicesRes.data.length,
-        users: 3,
+        users: usersRes.data.length,
         orders: orders.length,
         payments: orders.length,
         pending,
@@ -72,7 +74,7 @@ function AdminDashboard() {
     fetchData();
   }, []);
 
-  
+
 
   const salesData = [
     { name: "Today", value: data.today },
@@ -91,6 +93,8 @@ function AdminDashboard() {
     { name: "Sales", value: data.year }
   ];
 
+  const usersData = [{ name: "Active", value: data.users }];
+
   const COLORS = ["#ff9800", "#4caf50"];
 
   return (
@@ -98,7 +102,7 @@ function AdminDashboard() {
 
       <h1 className="dashboard-title">Admin Dashboard</h1>
 
-    
+
       <div className="dashboard-grid">
 
         <div className="card"><p className="card-title">Products</p><h2>{data.products}</h2></div>
@@ -115,10 +119,10 @@ function AdminDashboard() {
 
       </div>
 
-      
+
       <div className="charts-container">
 
-      
+
         <div className="chart-box">
           <h3>Sales Overview</h3>
 
@@ -133,7 +137,10 @@ function AdminDashboard() {
           </ResponsiveContainer>
         </div>
 
+
         
+
+
         <div className="chart-box">
           <h3>Order Status</h3>
 

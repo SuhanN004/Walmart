@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
+import WalmartHeader from "./WalmartHeader";
 import axios from "axios";
 import {
   PieChart, Pie, Cell,
-  BarChart, Bar, XAxis, YAxis, Tooltip
+  BarChart, Bar, XAxis, YAxis, Tooltip,Legend, ResponsiveContainer
 } from "recharts";
 
 import "../styles/UserDetails.css";
@@ -97,9 +99,11 @@ function UserDetails() {
   const COLORS = ["#4caf50", "#0a77ec", "#f44336"];
 
   return (
+    <>
+    <WalmartHeader />
     <div className="user-container">
 
-      <h1>Welcome, {user.firstName}</h1>
+      <h1 className="user-title">Welcome, {user.firstName} {user.lastName}</h1>
 
       
       <div className="user-info">
@@ -125,6 +129,7 @@ function UserDetails() {
 
         <div className="chart-box">
           <h3>Order Status</h3>
+          <ResponsiveContainer width="100%" height={300}>
           <PieChart width={300} height={300}>
             <Pie data={pieData} dataKey="value" outerRadius={100} label>
               {pieData.map((_, i) => (
@@ -132,9 +137,16 @@ function UserDetails() {
               ))}
               
             </Pie>
-             
+             <Legend />
           </PieChart>
+        </ResponsiveContainer>
         </div>
+
+        
+
+
+
+
 
         <div className="chart-box">
           <h3>Monthly Spending</h3>
@@ -142,13 +154,14 @@ function UserDetails() {
             <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="amount" fill="#0d8ae9" />
+            <Bar dataKey="amount" fill="#e9700d" />
           </BarChart>
         </div>
 
       </div>
 
     </div>
+    </>
   );
 }
 

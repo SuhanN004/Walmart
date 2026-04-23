@@ -78,13 +78,7 @@ function CartPage() {
           
           <div className="cart-right">
 
-            <button
-              className="checkout-btn"
-              onClick={handleCheckout}
-              disabled={cartItems.length === 0}
-            >
-              Buy Now
-            </button>
+            
 
             <div className="summary-box">
 
@@ -105,7 +99,16 @@ function CartPage() {
                 <span>₹{total}</span>
               </div>
 
+
             </div>
+
+            <button
+              className="checkout-btn"
+              onClick={handleCheckout}
+              disabled={cartItems.length === 0}
+            >
+              Buy Now
+            </button>
 
           </div>
 
