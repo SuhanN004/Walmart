@@ -11,6 +11,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
+import toast from "react-hot-toast"; // 🔥 ADD THIS
+
 import "../styles/CheckoutPage.css";
 import cardImage from "../assets/cards.jpg";
 
@@ -19,9 +21,7 @@ function CheckoutPage() {
   const stripe = useStripe();
   const BASE_URL = "https://walmart-3-ysdt.onrender.com";
 
-
   const elements = useElements();
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,9 +31,8 @@ function CheckoutPage() {
     location.state?.total ||
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 
-
-  const [loading,setLoading] = useState(false);
-  const [error,  setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -49,16 +48,14 @@ function CheckoutPage() {
     setError("");
 
     try {
-     
 
-
-
-      const res = await axios.post( `${BASE_URL}/api/payment/create-payment`, { amount: total } );
+      const res = await axios.post(
+        `${BASE_URL}/api/payment/create-payment`,
+        { amount: total }
+      );
 
       const clientSecret = res.data.clientSecret;
-      console.log("CLIENT SECRET:", clientSecret);
 
-      
       const cardElement = elements.getElement(CardNumberElement);
 
       if (!cardElement) {
@@ -67,8 +64,7 @@ function CheckoutPage() {
         return;
       }
 
-      
-      const result = await stripe.confirmCardPayment(clientSecret,{
+      const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
         },
@@ -76,28 +72,34 @@ function CheckoutPage() {
 
       if (result.error) {
         setError(result.error.message);
+        toast.error(result.error.message); // 🔥 ERROR TOAST
         setLoading(false);
         return;
       }
 
-
-
-      
       if (result.paymentIntent.status === "succeeded") {
 
-        await axios.post(`${BASE_URL}/api/order/create`, { userId: localStorage.getItem("userId"), items: cartItems, totalAmount: total });
+        await axios.post(`${BASE_URL}/api/order/create`, {
+          userId: localStorage.getItem("userId"),
+          items: cartItems,
+          totalAmount: total
+        });
 
         clearCart();
-        navigate("/orders");
+
+        // 🔥 SUCCESS TOAST
+        toast.success("Order placed! Invoice sent to your email 📩");
+
+        // 🔥 DELAY FOR BETTER UX
+        setTimeout(() => {
+          navigate("/orders");
+        }, 1500);
       }
-
-
-
-
 
     } catch (err) {
       console.log(err);
       setError("Payment failed. Try again.");
+      toast.error("Payment failed. Try again ❌");
     }
 
     setLoading(false);
@@ -120,15 +122,11 @@ function CheckoutPage() {
 
           <div className="row">
             <div>
-
               <label>Expiry</label>
               <div className="stripe-input">
                 <CardExpiryElement />
               </div>
             </div>
-
-
-
 
             <div>
               <label>CVC</label>
@@ -138,10 +136,10 @@ function CheckoutPage() {
             </div>
           </div>
 
-          {error &&<p className="error">{error}</p>}
+          {error && <p className="error">{error}</p>}
 
           <button className="pay-btn" disabled={loading || !stripe}>
-            {loading ?"Processing..." :`Pay ₹${total}`}
+            {loading ? "Processing..." : `Pay ₹${total}`}
           </button>
 
         </form>
@@ -153,10 +151,7 @@ function CheckoutPage() {
 
         <div className="summary-box">
           <p>Items: {cartItems.length}</p>
-
-
           <p>Delivery: Free</p>
-
           <h2>Total: ₹{total}</h2>
 
           <button className="summary-btn">

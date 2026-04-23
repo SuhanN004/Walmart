@@ -5,17 +5,28 @@ const path = require("path");
 const generateGSTInvoice = (order, user) => {
   return new Promise((resolve, reject) => {
 
+    // 🔥 CREATE FOLDER IF NOT EXISTS
+    const invoicesDir = path.join(__dirname, "../invoices");
+
+    if (!fs.existsSync(invoicesDir)) {
+      fs.mkdirSync(invoicesDir, { recursive: true });
+      console.log("📁 invoices folder created");
+    }
+
+    // 🔥 FILE PATH
     const filePath = path.join(
-      __dirname,
-      `../invoices/invoice_${order._id}.pdf`
+      invoicesDir,
+      `invoice_${order._id}.pdf`
     );
+
+    console.log("📄 Generating PDF at:", filePath);
 
     const doc = new PDFDocument({ margin: 40 });
     const stream = fs.createWriteStream(filePath);
 
     doc.pipe(stream);
 
-    
+    /* ================= HEADER ================= */
     doc
       .fontSize(22)
       .fillColor("#0a1f44")
@@ -44,8 +55,7 @@ const generateGSTInvoice = (order, user) => {
 
     doc.moveDown(2);
 
-    
-
+    /* ================= TABLE HEADER ================= */
     const tableTop = doc.y;
 
     doc.font("Helvetica-Bold");
@@ -59,8 +69,7 @@ const generateGSTInvoice = (order, user) => {
        .lineTo(550, tableTop + 15)
        .stroke();
 
-    
-
+    /* ================= ITEMS ================= */
     doc.font("Helvetica");
 
     let y = tableTop + 25;
@@ -80,8 +89,7 @@ const generateGSTInvoice = (order, user) => {
 
     doc.moveDown(2);
 
-   
-
+    /* ================= GST ================= */
     const cgst = subtotal * 0.09;
     const sgst = subtotal * 0.09;
     const grandTotal = subtotal + cgst + sgst;
@@ -111,12 +119,11 @@ const generateGSTInvoice = (order, user) => {
 
     doc.moveDown(3);
 
-    
-
+    /* ================= FOOTER ================= */
     doc.fontSize(10);
     doc.font("Helvetica");
 
-    doc.text("Thank you for shopping with us", {
+    doc.text("Thank you for shopping with us ❤️", {
       align: "center"
     });
 
@@ -129,8 +136,16 @@ const generateGSTInvoice = (order, user) => {
 
     doc.end();
 
-    stream.on("finish", () => resolve(filePath));
-    stream.on("error", reject);
+    /* ================= EVENTS ================= */
+    stream.on("finish", () => {
+      console.log("✅ PDF CREATED SUCCESSFULLY");
+      resolve(filePath);
+    });
+
+    stream.on("error", (err) => {
+      console.log("❌ PDF ERROR:", err);
+      reject(err);
+    });
 
   });
 };
