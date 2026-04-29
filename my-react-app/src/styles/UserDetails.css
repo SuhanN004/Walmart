@@ -1,12 +1,25 @@
 .user-container {
   padding: 40px;
-  background: #f5f6fa;
+  padding-top: 90px;
+  background: linear-gradient(to right, #f5f7fa, #eef1f5);
   min-height: 100vh;
-  padding-top: 100px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.user-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
 .user-info {
-  margin-bottom: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 25px;
 }
 
 .stats-grid {
@@ -18,38 +31,49 @@
 .card {
   background: white;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 14px;
   text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .charts {
-  display: flex;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
   margin-top: 40px;
 }
 
 .chart-box {
   background: white;
   padding: 20px;
-  border-radius: 12px;
-  flex: 0.5;
-  
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
-
-.user-title {
-  margin-bottom: 30px;
-  font-size: 45px;
-  font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
-  color: #000000;
-
+.chart-box h3 {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
+.full-width {
+  grid-column: span 2;
+}
 
-.user-info p {
-  font-size: 20px;
-  color: #020202;
-  margin: 8px 0;
-  font-family: 'Open Sans', sans-serif;
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
 }

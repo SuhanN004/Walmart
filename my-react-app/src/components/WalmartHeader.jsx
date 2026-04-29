@@ -9,9 +9,7 @@ import pickbox from '../assets/pickupboxmain.jpg'
 import cartIcon from '../assets/add-to-cart.png'
 
 import magnifier from '../assets/magnifier copy.png'
-
 import details from '../assets/details.png'
-
 
 import { useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
@@ -23,7 +21,7 @@ function WalmartHeader() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const api= import.meta.env.VITE_API;
+  const api = import.meta.env.VITE_API;
 
   const [open, setOpen] = useState(false)
   const [searchActive, setSearchActive] = useState(false)
@@ -46,6 +44,8 @@ function WalmartHeader() {
   const goToCart = () => navigate("/cart");
   const goToOrders = () => navigate("/orders");
   const goToDetails = () => navigate("/user/details");
+
+  
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${api}/api/service/view`)
@@ -62,17 +62,15 @@ function WalmartHeader() {
   return (
     <div className="w-header-wrapper">
 
-      
+    
       <div className="w-header">
 
         <div className="w-left">
 
-          
           <div className="w-item cart" onClick={goToHome}>
             <img src={logo} alt="walmart" className="w-logo" />
           </div>
 
-          
           <div className="pickup-box" onClick={() => setOpen(!open)}>
 
             <div className="pickup-icon">
@@ -93,7 +91,6 @@ function WalmartHeader() {
           </div>
         </div>
 
-       
         <div className={`w-search ${searchActive ? 'active' : ''}`}>
           <input
             type="text"
@@ -106,10 +103,9 @@ function WalmartHeader() {
           </button>
         </div>
 
-        
+      
         <div className="w-right">
 
-          
           <div
             className={`w-item my-orders ${
               location.pathname === "/orders" ? "active-nav" : ""
@@ -126,13 +122,11 @@ function WalmartHeader() {
             </span>
           </div>
 
-          
           <div className="w-item details" onClick={goToDetails}>
             <img src={details} alt="Details" className="details-icon" />
             <span>My <br />Details</span>
           </div>
 
-          
           <div className="w-item cart" onClick={goToCart}>
             <img src={cartIcon} alt="cart" className="cart-icon" />
 
@@ -148,7 +142,6 @@ function WalmartHeader() {
 
       
       {open && <div className="header-overlay" onClick={() => setOpen(false)} />}
-
 
       <div className={`pickup-dropdown ${open ? 'show' : ''}`}>
 
@@ -205,14 +198,23 @@ function WalmartHeader() {
             <div className="dept-overlay" onClick={() => setDeptOpen(false)} />
           )}
 
+          
           <button className="nav-btn bold" onClick={() => setServiceOpen(!serviceOpen)}>
             Services ▾
           </button>
 
+          
           {serviceOpen && (
             <div className="service-dropdown">
               {services.map((service) => (
-                <div key={service._id} className="service-item">
+                <div
+                  key={service._id}
+                  className="service-item"
+                  onClick={() => {
+                    navigate(`/category/${encodeURIComponent(service.title)}`);
+                    setServiceOpen(false); // close dropdown
+                  }}
+                >
                   {service.title}
                 </div>
               ))}
@@ -229,7 +231,6 @@ function WalmartHeader() {
 
         </div>
 
-        
         <div className="w-nav-right">
           <button
             className={`nav-btn bold ${

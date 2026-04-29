@@ -69,7 +69,7 @@ function AddService() {
 
   return (
     <div className="add-service-page">
-
+      
       <div className="add-service-card">
 
         <h2>Add Category</h2>

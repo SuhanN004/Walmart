@@ -15,7 +15,7 @@ function ProductPage() {
   const [product, setProduct] = useState(null);
   const [deliveryType, setDeliveryType] = useState("shipping"); 
 
-  const api= import.meta.env.VITE_API;
+  const api = import.meta.env.VITE_API;
 
   const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
 
@@ -57,13 +57,16 @@ function ProductPage() {
 
   if (!product) return <h2>Loading...</h2>;
 
+  
+  const mrp = product.price + 1199;
+
   return (
     <>
       <WalmartHeader />
 
       <div className="product-page">
 
-        
+       
         <div className="product-left">
           <div className="main-image-box">
             <img
@@ -80,13 +83,11 @@ function ProductPage() {
 
           <h2 className="product-title">{product.name}</h2>
 
-          
           <div className="desc-box">
             <h3>Product Description</h3>
             <p>{product.description}</p>
           </div>
 
-          
           {product.features && product.features.length > 0 && (
             <div className="features-box">
               <h3>Key Features</h3>
@@ -103,13 +104,14 @@ function ProductPage() {
         
         <div className="product-right">
 
+          
           <div className="price-box">
-            <h2 className="price">₹{product.price}</h2>
+            <span className="new-price">Now ₹{product.price}</span>
+            <span className="old-price">₹{mrp}</span>
           </div>
 
           <div className="cart-section">
 
-            
             {getItemQty() === 0 ? (
               <button
                 className="add-btn"
@@ -125,7 +127,6 @@ function ProductPage() {
               </div>
             )}
 
-            
             <button
               className="buy-btn"
               onClick={handleBuy}
@@ -133,12 +134,10 @@ function ProductPage() {
               Buy Now
             </button>
 
-            
             <h4 className="delivery-title">How you'll get this item:</h4>
 
             <div className="delivery-options">
 
-             
               <div
                 className={`delivery-card ${deliveryType === "shipping" ? "active" : ""}`}
                 onClick={() => setDeliveryType("shipping")}
@@ -153,7 +152,6 @@ function ProductPage() {
                 <p className="free">Free</p>
               </div>
 
-              
               <div
                 className={`delivery-card ${deliveryType === "pickup" ? "active" : ""}`}
                 onClick={() => setDeliveryType("pickup")}
@@ -166,7 +164,6 @@ function ProductPage() {
                 <p className="not">Not available</p>
               </div>
 
-              
               <div
                 className={`delivery-card ${deliveryType === "delivery" ? "active" : ""}`}
                 onClick={() => setDeliveryType("delivery")}

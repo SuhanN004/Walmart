@@ -8,7 +8,7 @@ import ProductPage from "./components/ProductPage";
 import CartPage from "./components/CartPage";
 import CheckoutPage from "./components/CheckoutPage";
 import MyOrders from "./components/MyOrders";
-
+import CategoryPage from "./components/CategoryPage";
 import AdminLogin from "./AdminComponents/AdminLogin";
 import AdminBoard from "./AdminComponents/adminboard";
 import AddProduct from "./AdminComponents/add-product";
@@ -40,6 +40,8 @@ function App() {
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/orders" element={<MyOrders />} />
       <Route path="/user/details" element={<UserDetails />} />
+      <Route path="/category/:category" element={<CategoryPage />} />
+
       
       <Route path="/auto-service" element={<DummyPage title="Auto Service Page" />} />
       <Route path="/cashback" element={<DummyPage title="Cashback Page" />} />

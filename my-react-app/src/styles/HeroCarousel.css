@@ -216,14 +216,14 @@
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 2fr 1.3fr 2fr; /* ✅ BOTH BIG SAME SIZE */
+  grid-template-columns: 2fr 1.3fr 2fr;
   gap: 20px;
   padding: 20px 40px;
   max-width: 1400px;
   margin: auto;
 }
 
-/* LEFT + RIGHT BIG SAME */
+
 .hero-big-left,
 .hero-big-right {
   height: 420px;
@@ -239,7 +239,7 @@
   object-fit: cover;
 }
 
-/* CENTER */
+
 .hero-center {
   display: flex;
   flex-direction: column;
@@ -279,7 +279,7 @@
   object-fit: cover;
 }
 
-/* RESPONSIVE */
+
 @media (max-width: 1000px) {
   .hero-grid {
     grid-template-columns: 1fr;

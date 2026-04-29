@@ -27,7 +27,7 @@ function CheckoutPage() {
 
   const api = import.meta.env.VITE_API;
 
-  
+
   const total =
     location.state?.total ||
     cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
@@ -63,7 +63,7 @@ function CheckoutPage() {
 
     try {
 
-      
+
       const res = await axios.post(
         `${api}/api/payment/create-payment`,
         { amount: total }
@@ -79,7 +79,7 @@ function CheckoutPage() {
         return;
       }
 
-      
+
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
@@ -93,7 +93,7 @@ function CheckoutPage() {
         return;
       }
 
-      
+
       if (result.paymentIntent.status === "succeeded") {
 
         // prevent multiple clicks
@@ -107,10 +107,10 @@ function CheckoutPage() {
 
         clearCart();
 
-        
+
         toast.success("Order placed! Invoice sent to your email 📩");
 
-        
+
         setTimeout(() => {
           navigate("/orders");
         }, 1500);
@@ -128,7 +128,7 @@ function CheckoutPage() {
   return (
     <div className="checkout-container">
 
-      {/* LEFT SIDE */}
+
       <div className="checkout-left">
 
         <h2>Payment Method</h2>
@@ -166,7 +166,7 @@ function CheckoutPage() {
         </form>
       </div>
 
-      {/* RIGHT SIDE */}
+      
       <div className="checkout-right">
 
         <h3>Order Summary</h3>

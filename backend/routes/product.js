@@ -85,6 +85,24 @@ route.delete("/delete/:id", async (req, res) => {
 });
 
 
+route.get("/category/:category", async (req, res) => {
+  try {
+    const category = req.params.category;
+
+    const products = await Product.find({
+      category: { $regex: new RegExp(`^${category}$`, "i") }
+    });
+
+    res.json(products);
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
+
+
 
 route.put("/update/:id", upload.single("image"), async (req, res) => {
     try {

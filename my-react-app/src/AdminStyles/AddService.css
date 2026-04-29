@@ -6,7 +6,9 @@
   justify-content: center;   
   align-items: center;       
   background-color: #c8d1dd;
+  margin-top: -79px;
 }
+
 
 
 
@@ -17,6 +19,7 @@
   
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  
 }
 
 

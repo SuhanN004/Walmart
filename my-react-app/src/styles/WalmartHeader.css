@@ -4,21 +4,24 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  height: 140px;
+
+  height: 125px; 
 }
 
 
 
 
-.w-header{
+.w-header {
   width:100%;
   background:#005AAF;
   display:flex;
 
   align-items:center;
   justify-content:space-between;
-  padding: 25px 25px;
+
+  padding: 18px 20px; 
   box-sizing:border-box;
+
   color:white;
   font-family: Arial, sans-serif;
 }
@@ -82,9 +85,9 @@
 }
 
 .pickup-icon {
-  width: 42px;
+  width: 38px;
 
-  height: 42px;
+  height: 38px;
   background: #0d5bd6;
   border-radius: 100%;
 
@@ -138,17 +141,15 @@
 
 .w-search input {
   width: 100%;
-
-
   max-width: 650px;
-  padding: 18px 60px 18px 25px;
 
+  padding: 15px 50px 16px 22px; 
 
-  border-radius: 35px;
-
+  border-radius: 30px;
   border: none;
   outline: none;
-  font-size: 15px;
+
+  font-size: 14px;
 }
 
 
@@ -156,13 +157,13 @@
 .search-btn {
 
   position: absolute;
-  right: 55px;              
-  top: 26px;
+  right: 40px;              
+  top: 24px;
   transform: translateY(-50%);
 
 
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
 
 
   background: #003a8c;
@@ -388,7 +389,7 @@
   justify-content: space-between;
   align-items: center;
   background: #f2f4f7;
-  padding: 10px 20px;
+  padding: 8px 16px;
 }
 
 .w-nav-left {
